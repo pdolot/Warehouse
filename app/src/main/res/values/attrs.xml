@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="FancyEditText">
+        <attr name="backgroundColor" format="color"/>
+        <attr name="color" format="color"/>
+        <attr name="iconColor" format="color"/>
+        <attr name="iconLeft" format="reference"/>
+        <attr name="outlineColor" format="color"/>
+    </declare-styleable>
+</resources>

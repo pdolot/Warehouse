@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Warehouse</string>
+    <string name="company_name">MPS Distribution</string>
+    <string name="recipient">Odbiorca</string>
+    <string name="departure_date">Data dostawy</string>
+    <string name="target_location">Adres dostawy</string>
+    <string name="pallets_positions">Palety / Pozycje</string>
+    <string name="order_id">ID zamówienia</string>
+    <string name="ramp">Rampa</string>
+</resources>

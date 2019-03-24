@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="2">
+
+    <ScrollView
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="290sp"
+                android:elevation="10dp">
+
+                <ImageView
+                    android:id="@+id/imageview"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/warehouseflat" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Logowanie"
+                    android:textAlignment="center"
+                    android:textSize="20sp" />
+
+                <com.example.patryk.warehouse.FancyEditText
+                    android:id="@+id/lf_userName"
+                    android:layout_width="match_parent"
+                    android:layout_height="46sp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="10dp"
+                    android:fontFamily="sans-serif-light"
+                    android:hint="ID pracownika"
+                    android:inputType="text"
+                    android:text=""
+                    app:backgroundColor="@color/editBackgroundColor"
+                    app:color="@color/editColor"
+                    app:iconColor="@color/editIconColor"
+                    app:iconLeft="@drawable/ic_login"
+                    app:outlineColor="@color/outlineColor" />
+                <com.example.patryk.warehouse.FancyEditText
+                    android:id="@+id/lf_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="46sp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="10dp"
+                    android:fontFamily="sans-serif-light"
+                    android:hint="Hasło"
+                    android:inputType="textPassword"
+                    app:backgroundColor="@color/editBackgroundColor"
+                    app:color="@color/editColor"
+                    app:iconColor="@color/editIconColor"
+                    app:iconLeft="@drawable/ic_password"
+                    app:outlineColor="@color/outlineColor" />
+
+                <RelativeLayout
+                    android:id="@+id/lf_sign_in"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginTop="26dp"
+                    android:layout_marginRight="80dp"
+                    android:background="@drawable/button"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:text="Zaloguj"
+                        android:textColor="@color/editIconColor"
+                        android:textSize="18sp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>
