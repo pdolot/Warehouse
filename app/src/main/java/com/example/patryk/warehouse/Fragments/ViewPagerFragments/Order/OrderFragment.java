@@ -1,5 +1,6 @@
 package com.example.patryk.warehouse.Fragments.ViewPagerFragments.Order;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,6 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.patryk.warehouse.Adapters.ProductsRecyclerViewAdapter;
+import com.example.patryk.warehouse.Fragments.MainFragment;
+import com.example.patryk.warehouse.Fragments.Scanner;
 import com.example.patryk.warehouse.Objects.OrderedProduct;
 import com.example.patryk.warehouse.Objects.Product;
 import com.example.patryk.warehouse.R;
@@ -26,6 +29,8 @@ import java.util.List;
 
 public class OrderFragment extends OrderBaseFragment implements
         View.OnClickListener, View.OnTouchListener {
+
+    public static String ORDER_RESULT_CODE = "";
 
     private ExpandableRelativeLayout orderInfo;
     private LinearLayout toolBar, cancelOrder;
@@ -40,6 +45,8 @@ public class OrderFragment extends OrderBaseFragment implements
     private RecyclerView rv_products;
     private ProductsRecyclerViewAdapter viewAdapter;
     private List<OrderedProduct> productList = new ArrayList<>();
+
+
 
     public static OrderFragment newInstance() {
         return new OrderFragment();
@@ -58,7 +65,6 @@ public class OrderFragment extends OrderBaseFragment implements
         addProduct("vodka");
         addProduct("beer");
     }
-
 
 
     @Override
@@ -124,6 +130,7 @@ public class OrderFragment extends OrderBaseFragment implements
                     open_icon.setImageResource(R.drawable.ic_arrowleft);
                     barCode_button.setBackgroundResource(R.drawable.ic_done);
                     inputIsOpen = true;
+                    inputCode.setText(ORDER_RESULT_CODE);
                 }
                 break;
             //-------
@@ -135,7 +142,7 @@ public class OrderFragment extends OrderBaseFragment implements
                 if(inputIsOpen){
 
                 }else{
-
+                    changeFragment(Scanner.newInstance("Order"),true);
                 }
                 break;
         }

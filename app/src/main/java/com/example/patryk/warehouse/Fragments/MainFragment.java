@@ -14,7 +14,8 @@ import android.widget.TextView;
 import com.example.patryk.warehouse.Adapters.ViewPagerAdapter;
 import com.example.patryk.warehouse.BaseFragment.BaseFragment;
 import com.example.patryk.warehouse.Fragments.ViewPagerFragments.Order.OrderBaseFragment;
-import com.example.patryk.warehouse.Fragments.ViewPagerFragments.SearchFragment;
+import com.example.patryk.warehouse.Fragments.ViewPagerFragments.Search.SearchBaseFragment;
+import com.example.patryk.warehouse.Fragments.ViewPagerFragments.Search.SearchFragment;
 import com.example.patryk.warehouse.R;
 
 import java.util.ArrayList;
@@ -74,7 +75,7 @@ public class MainFragment extends BaseFragment implements ViewPager.OnPageChange
 
     private void initFragments(){
         viewPagerAdapter = new ViewPagerAdapter(getFragmentManager());
-        viewPagerAdapter.addFragment(SearchFragment.newInstance(),"Wyszukaj produkt");
+        viewPagerAdapter.addFragment(SearchBaseFragment.newInstance(),"Wyszukaj produkt");
         viewPagerAdapter.addFragment(OrderBaseFragment.newInstance(),"Zamówienia");
         viewPagerAdapter.addFragment(SearchFragment.newInstance(),"Zwroty");
         viewPagerAdapter.addFragment(SearchFragment.newInstance(),"Dostawy");

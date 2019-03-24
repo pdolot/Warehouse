@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.patryk.warehouse.Adapters.OrdersRecyclerViewAdapter;
-import com.example.patryk.warehouse.Fragments.ViewPagerFragments.SearchFragment;
 import com.example.patryk.warehouse.Objects.Order;
 import com.example.patryk.warehouse.R;
 
