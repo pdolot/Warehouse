@@ -7,4 +7,7 @@
     <string name="pallets_positions">Palety / Pozycje</string>
     <string name="order_id">ID zamówienia</string>
     <string name="ramp">Rampa</string>
+    <string name="product_name">Nazwa produktu</string>
+    <string name="accept">Akceptuj</string>
+    <string name="cancel">Anuluj</string>
 </resources>

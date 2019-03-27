@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:weightSum="1"
+    android:layout_margin="8dp">
+
+    <LinearLayout
+        android:background="@drawable/button_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingBottom="?attr/actionBarSize">
+
+        <TextView
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"
+            android:id="@+id/tpd_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LOK: 223421"
+            android:textSize="20sp"
+            android:textColor="@color/textColor"
+            android:layout_marginBottom="8dp"
+            />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/tpd_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/take_product_row"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/separatorColor"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        android:translationZ="2dp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:orientation="horizontal"
+        android:translationZ="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:gravity="center">
+
+
+        <LinearLayout
+            android:id="@+id/tpd_accept"
+            android:background="@drawable/button_pos_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/accept"
+                android:textColor="@color/backgroundColor"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tpd_cancel"
+            android:background="@drawable/button_neg_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cancel"
+                android:textColor="@color/backgroundColor"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

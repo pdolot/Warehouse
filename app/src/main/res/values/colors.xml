@@ -13,8 +13,10 @@
     <color name="backgroundColor">#f7f7f7</color>
     <color name="iconColor">#006a98</color>
     <color name="textColor">#0f4f80</color>
+    <color name="titleColor">#12202b</color>
     <color name="viewPagerBackground">#f1f1f1</color>
     <color name="itemBackground">#f5f5f5</color>
     <color name="separatorColor">#cacaca</color>
     <color name="buttonBackground">#d9d9d9</color>
+    <color name="transparent">#00ffffff</color>
 </resources>

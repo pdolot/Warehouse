@@ -76,10 +76,10 @@ public class MainFragment extends BaseFragment implements ViewPager.OnPageChange
     private void initFragments(){
         viewPagerAdapter = new ViewPagerAdapter(getFragmentManager());
         viewPagerAdapter.addFragment(SearchBaseFragment.newInstance(),"Wyszukaj produkt");
-        viewPagerAdapter.addFragment(OrderBaseFragment.newInstance(),"Zamówienia");
+        viewPagerAdapter.addFragment(OrderBaseFragment.newInstance(),"Zlecenia");
+        viewPagerAdapter.addFragment(SearchFragment.newInstance(),"Zmień lokalizację");
         viewPagerAdapter.addFragment(SearchFragment.newInstance(),"Zwroty");
-        viewPagerAdapter.addFragment(SearchFragment.newInstance(),"Dostawy");
-        viewPagerAdapter.addFragment(SearchFragment.newInstance(),"Dziennik");
+        viewPagerAdapter.addFragment(SearchFragment.newInstance(),"Lokalizację");
     }
 
     private void initViewPager(int startPosition){

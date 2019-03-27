@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-light"
                 android:text="@string/recipient"
-                android:textColor="@color/textColor"
+                android:textColor="@color/titleColor"
                 android:textSize="12sp" />
 
             <TextView
@@ -78,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-light"
                 android:text="@string/target_location"
-                android:textColor="@color/textColor"
+                android:textColor="@color/titleColor"
                 android:textSize="12sp" />
 
             <TextView

@@ -241,11 +241,11 @@
                 android:textColor="@color/backgroundColor"
                 android:textSize="18sp" />
             <TextView
+                android:id="@+id/of_took_product"
                 android:gravity="end"
                 android:layout_weight="0.1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="14/126"
                 android:textColor="@color/backgroundColor"
                 android:textSize="18sp"/>
 

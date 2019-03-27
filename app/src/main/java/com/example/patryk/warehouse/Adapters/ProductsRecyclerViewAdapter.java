@@ -42,6 +42,9 @@ public class ProductsRecyclerViewAdapter extends RecyclerView.Adapter<ProductsRe
         viewHolder.productName.setText(product.getName());
         viewHolder.productLocation.setText(product.getLocation());
         viewHolder.productCount.setText(String.valueOf(o_product.getCount()) + " szt");
+        if(o_product.getCount() == 0){
+            viewHolder.icon.setImageResource(R.drawable.ic_done);
+        }
     }
 
     @Override
