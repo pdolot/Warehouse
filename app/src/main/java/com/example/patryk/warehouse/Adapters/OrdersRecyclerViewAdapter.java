@@ -8,12 +8,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.patryk.warehouse.Objects.Order;
+import com.example.patryk.warehouse.Models.Order;
 import com.example.patryk.warehouse.R;
 
 import java.util.List;
 
 public class OrdersRecyclerViewAdapter extends RecyclerView.Adapter<OrdersRecyclerViewAdapter.ViewHolder> {
+
+    private static ClickListener clickListener;
+
+    public interface ClickListener {
+        void onItemClick(int position, View v);
+    }
 
     private List<Order> orders;
     private Context context;
@@ -34,13 +40,8 @@ public class OrdersRecyclerViewAdapter extends RecyclerView.Adapter<OrdersRecycl
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Order order = orders.get(i);
-        viewHolder.recipient.setText(order.getRecipient());
-        viewHolder.targetLocation.setText(order.getTargetLocation());
-        if(i % 2 == 0){
-            viewHolder.itemView.setBackgroundColor(context.getResources().getColor(R.color.itemBackground,null));
-        }
-
-        viewHolder.itemView.setTranslationZ(-i);
+        viewHolder.recipient.setText(order.getRecipient().getName());
+        viewHolder.targetLocation.setText(order.getRecipient().getAddress());
     }
 
     @Override
@@ -51,7 +52,13 @@ public class OrdersRecyclerViewAdapter extends RecyclerView.Adapter<OrdersRecycl
         return 0;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public void setOnClickListener(ClickListener clickListener){
+        OrdersRecyclerViewAdapter.clickListener = clickListener;
+    }
+
+
+
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView recipient;
         TextView targetLocation;
@@ -61,6 +68,7 @@ public class OrdersRecyclerViewAdapter extends RecyclerView.Adapter<OrdersRecycl
         public ViewHolder(View itemView) {
             super(itemView);
             findViews(itemView);
+            itemView.setOnClickListener(this);
         }
 
         private void findViews(View v){
@@ -68,6 +76,11 @@ public class OrdersRecyclerViewAdapter extends RecyclerView.Adapter<OrdersRecycl
             targetLocation = v.findViewById(R.id.oi_targetLocation);
             departureDate_ddMM = v.findViewById(R.id.oi_date_ddMM);
             departureDate_yyyy = v.findViewById(R.id.oi_date_yyyy);
+        }
+
+        @Override
+        public void onClick(View v) {
+            clickListener.onItemClick(getAdapterPosition(),v);
         }
     }
 

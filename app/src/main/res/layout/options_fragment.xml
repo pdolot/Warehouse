@@ -16,36 +16,27 @@
         android:paddingTop="24dp"
         android:paddingBottom="24dp"
         android:orientation="vertical"
-        android:gravity="center|left"
+        android:gravity="center"
         android:elevation="4dp">
+
+        <ImageView
+            android:layout_width="104dp"
+            android:layout_height="104dp"
+            android:src="@drawable/ic_worker"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:gravity="center">
-
-            <ImageView
-                android:layout_width="46dp"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_worker"
-                android:tint="@color/backgroundColor"/>
-
-            <LinearLayout
-                android:layout_marginLeft="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center|left"
-                android:orientation="vertical">
                 <TextView
                     android:id="@+id/of_userName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/backgroundColor"
                     android:text="Patryk Doleciński"
-                    android:textSize="24sp" />
+                    android:textSize="20sp" />
                 <TextView
-                    android:layout_marginTop="6dp"
                     android:id="@+id/of_userID"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -53,14 +44,13 @@
                     android:text="ID Pracownika: 242543"
                     android:textSize="16sp"
                     android:fontFamily="sans-serif-light"/>
-            </LinearLayout>
         </LinearLayout>
 
         <View
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/backgroundColor"/>
+            android:background="#28ffffff"/>
 
         <TextView
             android:layout_marginTop="6dp"
@@ -69,7 +59,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/backgroundColor"
             android:text="Liczba wykonanych zleceń: 9"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:fontFamily="sans-serif-light"/>
         <TextView
             android:layout_marginTop="6dp"
@@ -78,7 +68,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/backgroundColor"
             android:text="Godziny pracy: 06:00-14:00"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:fontFamily="sans-serif-light"/>
     </LinearLayout>
 
@@ -104,8 +94,8 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:layout_width="30sp"
-                    android:layout_height="30dp"
+                    android:layout_width="36sp"
+                    android:layout_height="36dp"
                     android:src="@drawable/ic_search"
                     android:tint="@color/iconColor"/>
                 <TextView
@@ -132,9 +122,9 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:layout_width="30sp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/ic_barcode"
+                    android:layout_width="36sp"
+                    android:layout_height="36dp"
+                    android:src="@drawable/ic_orders"
                     android:tint="@color/iconColor"/>
                 <TextView
                     android:layout_marginLeft="10dp"
@@ -160,16 +150,16 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:layout_width="30sp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/ic_search"
+                    android:layout_width="36sp"
+                    android:layout_height="36dp"
+                    android:src="@drawable/ic_change"
                     android:tint="@color/iconColor"/>
                 <TextView
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Zwroty"
+                    android:text="Zmień lokalizację"
                     android:textSize="18sp"
                     android:fontFamily="sans-serif-light"
                     android:textColor="@color/textColor"/>
@@ -188,16 +178,16 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:layout_width="30sp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/ic_search"
+                    android:layout_width="36sp"
+                    android:layout_height="36dp"
+                    android:src="@drawable/ic_returns"
                     android:tint="@color/iconColor"/>
                 <TextView
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dostawy"
+                    android:text="Zwroty"
                     android:textSize="18sp"
                     android:fontFamily="sans-serif-light"
                     android:textColor="@color/textColor"/>
@@ -216,16 +206,16 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:layout_width="30sp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/ic_search"
+                    android:layout_width="36sp"
+                    android:layout_height="36dp"
+                    android:src="@drawable/ic_delivery"
                     android:tint="@color/iconColor"/>
                 <TextView
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Wykonane zlecenia"
+                    android:text="Dostawy"
                     android:textSize="18sp"
                     android:fontFamily="sans-serif-light"
                     android:textColor="@color/textColor"/>
@@ -244,8 +234,8 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:layout_width="30sp"
-                    android:layout_height="30dp"
+                    android:layout_width="36sp"
+                    android:layout_height="36dp"
                     android:src="@drawable/ic_remove"
                     android:tint="@color/iconColor"/>
                 <TextView

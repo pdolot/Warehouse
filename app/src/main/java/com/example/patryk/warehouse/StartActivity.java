@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.patryk.warehouse.Fragments.LoginFragment;
 import com.example.patryk.warehouse.Navigation.FragmentNavigation;
+import com.example.patryk.warehouse.REST.Rest;
 
 public class StartActivity extends AppCompatActivity implements FragmentNavigation {
 
@@ -18,8 +19,8 @@ public class StartActivity extends AppCompatActivity implements FragmentNavigati
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+        Rest.init();
         changeFragment(LoginFragment.newInstance(),false);
-
     }
 
     @Override

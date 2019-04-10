@@ -8,12 +8,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.patryk.warehouse.Adapters.TakeProductRecyclerViewAdapter;
-import com.example.patryk.warehouse.Objects.OrderedProduct;
-import com.example.patryk.warehouse.Objects.ProductToTake;
+import com.example.patryk.warehouse.Models.ProductToTake;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -32,19 +33,20 @@ public class TakeProductDialog extends Dialog {
 
     private LinearLayout accept, cancel;
     private TextView locationLabel;
-    private OrderedProduct product;
     private RecyclerView recyclerView;
     private List<ProductToTake> productToTakes = new ArrayList<>();
     private TakeProductRecyclerViewAdapter adapter;
+    private boolean ordered;
+    private CheckBox checkAll;
 
-    public double[] getValues() {
+    public int[] getValues() {
         return adapter.getValues();
     }
 
-    public TakeProductDialog(@NotNull Context context, OrderedProduct product, String location) {
+    public TakeProductDialog(@NotNull Context context, String location, boolean ordered) {
         super(context);
-        this.product = product;
         this.location = location;
+        this.ordered = ordered;
     }
 
 
@@ -75,10 +77,27 @@ public class TakeProductDialog extends Dialog {
         cancel = findViewById(R.id.tpd_cancel);
         locationLabel = findViewById(R.id.tpd_location);
         recyclerView = findViewById(R.id.tpd_recyclerView);
+        checkAll = findViewById(R.id.tpd_checkAll);
+        checkAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    for (ProductToTake productToTake : productToTakes) {
+                        productToTake.setTookCount(productToTake.getCount());
+                    }
+                    adapter.notifyDataSetChanged();
+                }else{
+                    for (ProductToTake productToTake : productToTakes) {
+                        productToTake.setTookCount(0);
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        });
     }
 
     private void setAdapter(){
-        adapter = new TakeProductRecyclerViewAdapter(productToTakes,getContext());
+        adapter = new TakeProductRecyclerViewAdapter(productToTakes,getContext(), ordered);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
     }

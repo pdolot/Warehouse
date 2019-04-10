@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/field_background"
+                android:padding="16dp"
+                android:orientation="vertical"
+                android:layout_margin="1dp"
+                android:elevation="1dp">
+                <TextView
+                    android:id="@+id/cl_step"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Krok 1"
+                    android:textColor="@color/titleColor"
+                    android:textSize="12dp"
+                    android:fontFamily="sans-serif-light"/>
+                <TextView
+                    android:id="@+id/cl_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cl_stepOne"
+                    android:textColor="@color/textColor"
+                    android:textSize="16dp"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:fontFamily="sans-serif-light"/>
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="16dp">
+                    <com.example.patryk.warehouse.ProgressArrow
+                        android:layout_gravity="center"
+                        android:id="@+id/second_bar"
+                        android:layout_width="match_parent"
+                        android:layout_height="280sp"
+                        android:layout_centerInParent="true"
+                        android:paddingLeft="15sp"
+                        app:progressBackgroundColor="@color/separatorColor"
+                        app:progress="0"
+                        app:progressFirstColor="@color/iconColor"
+                        app:progressStrokeWidth="30"
+                        app:angleMAX="140"/>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerInParent="true"
+                    android:gravity="center">
+                    <TextView
+                        android:id="@+id/cl_first_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:textColor="@color/iconColor"/>
+
+                    <LinearLayout
+                        android:visibility="invisible"
+                        android:id="@+id/cl_changePallets"
+                        android:elevation="1dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginBottom="32dp"
+                        android:background="@drawable/button"
+                        android:layout_gravity="center"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp"
+                        android:paddingEnd="16dp"
+                        android:paddingStart="8dp">
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/ic_accept"
+                            android:tint="@color/backgroundColor"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="  ZAMIEŃ PALETY"
+                            android:textSize="16sp"
+                            android:textColor="@color/backgroundColor"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/cl_second_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:textColor="@color/textColor"/>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:rotation="180">
+                    <com.example.patryk.warehouse.ProgressArrow
+                        android:layout_gravity="center"
+                        android:id="@+id/first_bar"
+                        android:layout_width="match_parent"
+                        android:layout_height="280sp"
+                        android:layout_centerInParent="true"
+                        android:paddingLeft="15sp"
+                        app:progressBackgroundColor="@color/separatorColor"
+                        app:progress="0"
+                        app:progressFirstColor="@color/textColor"
+                        app:progressStrokeWidth="30"
+                        app:angleMAX="140"/>
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_marginTop="32dp">
+
+                <ImageView
+                    android:layout_marginStart="32dp"
+                    android:id="@+id/cl_firstDot"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:scaleY="0.5"
+                    android:scaleX="0.5"
+                    android:src="@drawable/oval"/>
+
+                <ImageView
+                    android:clickable="false"
+                    android:id="@+id/cl_secondDot"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/oval"
+                    android:tint="@color/separatorColor"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:scaleY="0.25"
+                    android:scaleX="0.25"/>
+
+                <ImageView
+                    android:clickable="false"
+                    android:id="@+id/cl_thirdDot"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/oval"
+                    android:tint="@color/separatorColor"
+                    android:layout_marginEnd="32dp"
+                    android:scaleY="0.25"
+                    android:scaleX="0.25"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/cl_bar_code"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:background="@drawable/ic_barcode_background"
+            android:baselineAligned="false"
+            android:padding="20dp" />
+
+        <LinearLayout
+            android:id="@+id/cl_input_layout"
+            android:layout_width="250dp"
+            android:layout_height="46dp"
+            android:layout_marginLeft="-36dp"
+            android:background="@color/buttonBackground"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:translationZ="-1dp"
+            android:visibility="gone">
+
+            <EditText
+                android:id="@+id/cl_inputCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="4dp"
+                android:background="@drawable/edit_background"
+                android:fontFamily="sans-serif-light"
+                android:hint="Wprowadź miejsce paletowe"
+                android:inputType="number"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/cl_open_input"
+            android:layout_width="52dp"
+            android:layout_height="46dp"
+            android:layout_marginStart="-16dp"
+            android:background="@drawable/barcode_background"
+            android:gravity="end"
+            android:translationZ="-2dp">
+
+            <ImageView
+                android:id="@+id/cl_open_icon"
+                android:layout_width="42dp"
+                android:layout_height="46dp"
+                android:src="@drawable/ic_arrowright"
+                android:tint="@color/iconColor"
+                android:translationZ="-1dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

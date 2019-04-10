@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.patryk.warehouse.Fragments.ViewPagerFragments.ChangeLocation.ChangeLocationFragment;
 import com.example.patryk.warehouse.Fragments.ViewPagerFragments.Order.OrderFragment;
 import com.example.patryk.warehouse.Fragments.ViewPagerFragments.Search.SearchFragment;
 import com.google.zxing.Result;
@@ -46,6 +47,13 @@ public class Scanner extends Fragment implements ZXingScannerView.ResultHandler 
             SearchFragment.SEARCH_RESULT_CODE = rawResult.getText();
         }else if(parentFragment.equals("Order")){
             OrderFragment.ORDER_RESULT_CODE = rawResult.getText();
+        }else if(parentFragment.equals("ChangeLocation")){
+            if(ChangeLocationFragment.CHANGE_LOCATION_RESULT_CODE.equals("")){
+                ChangeLocationFragment.CHANGE_LOCATION_RESULT_CODE = rawResult.getText();
+            }else{
+                ChangeLocationFragment.CHANGE_LOCATION_RESULT_CODE2 = rawResult.getText();
+            }
+            
         }
         getFragmentManager().popBackStack();
     }

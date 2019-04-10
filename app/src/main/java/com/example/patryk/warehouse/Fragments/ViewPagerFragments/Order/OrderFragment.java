@@ -1,7 +1,11 @@
 package com.example.patryk.warehouse.Fragments.ViewPagerFragments.Order;
 
+import android.content.Context;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,138 +20,204 @@ import android.widget.Toast;
 
 import com.example.patryk.warehouse.Adapters.ProductsRecyclerViewAdapter;
 import com.example.patryk.warehouse.Fragments.Scanner;
-import com.example.patryk.warehouse.Objects.OrderedProduct;
-import com.example.patryk.warehouse.Objects.Product;
-import com.example.patryk.warehouse.Objects.ProductToTake;
+import com.example.patryk.warehouse.Models.Id;
+import com.example.patryk.warehouse.Models.Location;
+import com.example.patryk.warehouse.Models.Order;
+import com.example.patryk.warehouse.Models.OrderedProduct;
+import com.example.patryk.warehouse.Models.Product;
+import com.example.patryk.warehouse.Models.ProductToTake;
+import com.example.patryk.warehouse.Models.SerializedProduct;
 import com.example.patryk.warehouse.R;
+import com.example.patryk.warehouse.REST.Rest;
 import com.example.patryk.warehouse.TakeProductDialog;
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class OrderFragment extends OrderBaseFragment implements
         View.OnClickListener, View.OnTouchListener {
 
     public static String ORDER_RESULT_CODE = "";
+    private static String ORDER_ID = "ORDER_ID";
 
     private ExpandableRelativeLayout orderInfo;
     private LinearLayout toolBar, cancelOrder;
+    private TextView cancelOrderText;
+    private ImageView cancelOrderIcon;
 
     private LinearLayout input_layout, open_input;
     private ImageView barCode_button, open_icon;
     private EditText inputCode;
 
     private boolean inputIsOpen = false;
+    private Location location;
     private float yStart;
 
     private RecyclerView rv_products;
     private ProductsRecyclerViewAdapter viewAdapter;
     private List<OrderedProduct> productList = new ArrayList<>();
+    private List<ProductToTake> tookProduct = new ArrayList<>();
+
+    private static Order order;
+    private TextView recipient, address, o_id, departureDate, pallets, postitions;
 
     private TextView tookProductCount;
+    private static Bundle savedInstance;
 
-    public static OrderFragment newInstance() {
-        return new OrderFragment();
+    public static OrderFragment newInstance(long id) {
+        Bundle args = new Bundle();
+        args.putLong(ORDER_ID, id);
+        OrderFragment fragment = new OrderFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addProduct("wine", "020501",90);
-        addProduct("vodka","030503", 84);
-        addProduct("beer","0105012", 16);
-        addProduct("wine","020502", 17);
-        addProduct("vodka","030502",6);
-        addProduct("beer","010803", 20);
-        addProduct("wine","010503",36);
-        addProduct("vodka","030401",18);
-        addProduct("beer","010803",6);
+        fetch_data(getArguments().getLong(ORDER_ID));
+
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        savedInstance = new Bundle();
+        savedInstance.putSerializable("Order",order);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.order_fragment, container, false);
         findViews(view);
+        if(savedInstance != null) {
+            setOrderInfo();
+            setTookProductCount();
+        }
         setListeners();
         setAdapter();
-        setTookProductCount();
-        showDialog();
         return view;
     }
 
-    private void setTookProductCount(){
+    private void setTookProductCount() {
         int counter = 0;
-        for(OrderedProduct p : productList){
-            if(p.getCount() == 0){
+        for (OrderedProduct p : productList) {
+            if (p.getCount() == 0) {
                 counter++;
             }
         }
+
+        if (counter == productList.size() && productList.size() > 0){
+            orderInfo.setBackgroundColor(getResources().getColor(R.color.possitive,null));
+            toolBar.setBackground(getResources().getDrawable(R.drawable.toolbar_pos,null));
+            cancelOrderText.setText("ZAKOŃCZ ZAMÓWIENIE");
+            cancelOrderIcon.setImageResource(R.drawable.ic_accept);
+            //cancelOrder.setBackground(getResources().getDrawable(R.drawable.button_possitive,null));
+        }
+//        else{
+//            orderInfo.setBackgroundColor(getResources().getColor(R.color.editColor,null));
+//            toolBar.setBackground(getResources().getDrawable(R.drawable.toolbar,null));
+//            cancelOrderText.setText("PRZERWIJ ZAMÓWIENIE");
+//            cancelOrderIcon.setImageResource(R.drawable.ic_remove);
+//            //cancelOrder.setBackground(getResources().getDrawable(R.drawable.button_danger,null));
+//        }
         tookProductCount.setText(String.valueOf(counter) + " / " + String.valueOf(productList.size()));
     }
 
-    private void showDialog(){
-        // need to check if code exist in data base
-        if(!ORDER_RESULT_CODE.equals("")){
-            // get products on this location and check
-            // create list of product in this location
-            final List<ProductToTake> productToTake = new ArrayList<>();
-            for(OrderedProduct p : productList){
-                if(p.getProduct().getLocation().equals(ORDER_RESULT_CODE) && p.getCount() > 0){
-                    productToTake.add(new ProductToTake(p,120));
+    private void showDialog() {
+
+        // get products on this location and check
+        // create list of product in this location
+        final List<ProductToTake> productToTake = new ArrayList<>();
+
+        List<SerializedProduct> productsOnLocation = new ArrayList<>();
+        productsOnLocation.addAll(location.getProducts());
+
+        // checking if on scanned location exist
+        for (OrderedProduct p : productList) {
+            if (p.getProduct().getLocation().getBarCodeLocation().equals(ORDER_RESULT_CODE) && p.getCount() > 0) {
+                for (SerializedProduct serializedProduct : productsOnLocation) {
+                    if(p.getProduct().getName().equals(serializedProduct.getProduct().getName())
+                            && p.getProduct().getProducer().equals(serializedProduct.getProduct().getProducer())){
+                        productToTake.add(new ProductToTake(serializedProduct,p.getCount()));
+                    }
                 }
+
             }
+        }
 
-            if(productToTake.size() > 0){
-                final TakeProductDialog productDialog = new TakeProductDialog(getContext(),null,ORDER_RESULT_CODE);
-                productDialog.setProductToTakes(productToTake);
-                productDialog.show();
-                productDialog.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        switch (v.getId()){
-                            case R.id.tpd_accept:
-                                double values[] = productDialog.getValues();
+        if (productToTake.size() > 0) {
+            final TakeProductDialog productDialog = new TakeProductDialog(getContext(), ORDER_RESULT_CODE, true);
+            productDialog.setProductToTakes(productToTake);
+            productDialog.show();
+            productDialog.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    switch (v.getId()) {
+                        case R.id.tpd_accept:
+                            boolean isOk = true;
 
-                                for(int i = 0; i < values.length; i++){
-                                    double count = productToTake.get(i).getProduct().getCount();
-                                    if(values[i] <= count && values[i] <= 120){
-                                        productToTake.get(i).getProduct().setCount(count - values[i]);
+                            for (OrderedProduct p : productList) {
+                                int tookCount = 0;
+                                for (ProductToTake t : productToTake) {
+                                    if(p.getProduct().getName().equals(t.getProduct().getProduct().getName())
+                                            && p.getProduct().getProducer().equals(t.getProduct().getProduct().getProducer())){
+                                        tookCount += t.getTookCount();
                                     }
                                 }
 
-                                for(OrderedProduct p : productList){
-                                    for(ProductToTake t : productToTake){
-                                        if(p == t.getProduct()){
-                                            p.setCount(t.getProduct().getCount());
+                                if(tookCount > p.getCount()){
+                                    isOk = false;
+                                    Toast.makeText(getContext(), "Nie możesz wziąć więcej", Toast.LENGTH_SHORT).show();
+                                }else{
+                                    p.setTookCount(p.getTookCount() + tookCount);
+                                    p.setCount(p.getCount() - tookCount);
+                                    for (ProductToTake t : productToTake) {
+                                        if(p.getProduct().getName().equals(t.getProduct().getProduct().getName())
+                                                && p.getProduct().getProducer().equals(t.getProduct().getProduct().getProducer())
+                                                && t.getTookCount() != 0){
+                                            tookProduct.add(t);
                                         }
                                     }
-                                    viewAdapter.notifyDataSetChanged();
                                 }
+                            }
+                            if(isOk){
+                                viewAdapter.notifyDataSetChanged();
                                 setTookProductCount();
                                 productDialog.dismiss();
-                                break;
-                            case R.id.tpd_cancel:
-                                productDialog.dismiss();
-                                ORDER_RESULT_CODE = "";
-                                break;
-                        }
+                                closeInput();
+                            }
+                            break;
+                        case R.id.tpd_cancel:
+                            productDialog.dismiss();
+                            ORDER_RESULT_CODE = "";
+                            break;
                     }
-                });
-            }
+                }
+            });
         }
     }
 
-    private void addProduct(String category, String location, double count) {
-        Product p = new Product();
-        p.setName("Carlo Rossi Sweet Rose, 0.75 BUT");
-        p.setLocation(location);
-        p.setCategory(category);
-        OrderedProduct product = new OrderedProduct();
-        product.setProduct(p);
-        product.setCount(count);
-        productList.add(product);
+    private void mergeTookProducts(){
+
+        if(tookProduct.size() > 1){
+            for(int i = 0; i < tookProduct.size();i++){
+
+                for(int j = tookProduct.size() - 1; j > i;j--){
+                    if(tookProduct.get(i).getProduct().equals(tookProduct.get(j).getProduct())){
+                        int tCount = tookProduct.get(i).getTookCount();
+                        tookProduct.get(i).setTookCount(tCount + tookProduct.get(j).getTookCount());
+                        tookProduct.remove(j);
+                    }
+                }
+            }
+        }
     }
 
     private void findViews(View v) {
@@ -161,6 +231,17 @@ public class OrderFragment extends OrderBaseFragment implements
         cancelOrder = v.findViewById(R.id.of_cancelOrder);
         inputCode = v.findViewById(R.id.of_inputCode);
         tookProductCount = v.findViewById(R.id.of_took_product);
+
+        //info
+        recipient = v.findViewById(R.id.of_orderRecipient);
+        address = v.findViewById(R.id.of_orderTargetLocation);
+        o_id = v.findViewById(R.id.of_orderId);
+        departureDate = v.findViewById(R.id.of_orderDepartureDate);
+        pallets = v.findViewById(R.id.of_orderPallets);
+        postitions = v.findViewById(R.id.of_orderPositions);
+
+        cancelOrderIcon = v.findViewById(R.id.of_cancelOrderIcon);
+        cancelOrderText = v.findViewById(R.id.of_cancelOrderText);
     }
 
     private void setListeners() {
@@ -171,8 +252,8 @@ public class OrderFragment extends OrderBaseFragment implements
         barCode_button.setOnClickListener(this);
     }
 
-    private void setAdapter(){
-        viewAdapter = new ProductsRecyclerViewAdapter(productList,getContext());
+    private void setAdapter() {
+        viewAdapter = new ProductsRecyclerViewAdapter(productList, getContext());
         rv_products.setLayoutManager(new LinearLayoutManager(getContext()));
         rv_products.setAdapter(viewAdapter);
     }
@@ -184,31 +265,26 @@ public class OrderFragment extends OrderBaseFragment implements
             case R.id.o_toolbar:
                 orderInfo.toggle();
                 break;
-             // layout to insert location code
+            // layout to insert location code
             case R.id.of_open_input:
-                if(inputIsOpen){
-                    input_layout.setVisibility(View.GONE);
-                    open_icon.setImageResource(R.drawable.ic_arrowright);
-                    barCode_button.setBackgroundResource(R.drawable.ic_barcode_background);
-                    inputIsOpen = false;
-                }else{
-                    input_layout.setVisibility(View.VISIBLE);
-                    open_icon.setImageResource(R.drawable.ic_arrowleft);
-                    barCode_button.setBackgroundResource(R.drawable.ic_done);
-                    inputIsOpen = true;
+                if (inputIsOpen) {
+                    closeInput();
+                } else {
+                    openInput();
                 }
                 break;
             // cancel order
             case R.id.of_cancelOrder:
-                changeFragment(OrdersFragment.newInstance(),false);
+                mergeTookProducts();
+                changeFragment(OrdersFragment.newInstance(), false);
                 break;
             // scanner button
             case R.id.of_bar_code:
-                if(inputIsOpen){
+                if (inputIsOpen) {
                     ORDER_RESULT_CODE = inputCode.getText().toString();
-                    showDialog();
-                }else{
-                    changeFragment(Scanner.newInstance("Order"),true);
+                    if(!ORDER_RESULT_CODE.equals("")) getInfoAboutLocation();
+                } else {
+                    changeFragment(Scanner.newInstance("Order"), true);
                 }
                 break;
         }
@@ -216,20 +292,20 @@ public class OrderFragment extends OrderBaseFragment implements
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.of_rv_products:
-                switch (event.getAction()){
+                switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         yStart = event.getY();
                         break;
                     case MotionEvent.ACTION_UP:
-                        if(!rv_products.canScrollVertically(-1)){
-                            if(yStart - event.getY() < 0){
+                        if (!rv_products.canScrollVertically(-1)) {
+                            if (yStart - event.getY() < 0) {
                                 orderInfo.expand();
-                            }else if(yStart - event.getY() > 0){
+                            } else if (yStart - event.getY() > 0) {
                                 orderInfo.collapse();
                             }
-                        }else{
+                        } else {
                             if (orderInfo.isExpanded()) {
                                 orderInfo.collapse();
                             }
@@ -242,4 +318,79 @@ public class OrderFragment extends OrderBaseFragment implements
         return false;
     }
 
+    private void openInput() {
+        input_layout.setVisibility(View.VISIBLE);
+        open_icon.setImageResource(R.drawable.ic_arrowleft);
+        barCode_button.setBackgroundResource(R.drawable.ic_done);
+        inputIsOpen = true;
+    }
+
+    private void closeInput() {
+        input_layout.setVisibility(View.GONE);
+        open_icon.setImageResource(R.drawable.ic_arrowright);
+        barCode_button.setBackgroundResource(R.drawable.ic_barcode_background);
+        inputIsOpen = false;
+    }
+
+    private void fetch_data(final Long order_id) {
+        Id id = new Id();
+        id.setId(order_id);
+        Rest.getRest().getOrder(Rest.token, id).enqueue(new Callback<Order>() {
+            @Override
+            public void onResponse(Call<Order> call, Response<Order> response) {
+                if (response.isSuccessful() && response != null) {
+                    order = response.body();
+                    setOrderInfo();
+                    productList.addAll(order.getProducts());
+                    viewAdapter.notifyDataSetChanged();
+                    setTookProductCount();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Order> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void setOrderInfo() {
+        recipient.setText(order.getRecipient().getName());
+        address.setText(order.getRecipient().getAddress());
+        o_id.setText(String.valueOf(order.getId()));
+        departureDate.setText(String.valueOf(order.getDepartureDate().substring(0, 10)));
+        pallets.setText(String.valueOf(order.getNumberOfPallets()));
+        postitions.setText(String.valueOf(order.getNumberOfProducts()));
+    }
+
+    private void getInfoAboutLocation() {
+        Location l = new Location();
+        l.setBarCodeLocation(ORDER_RESULT_CODE);
+        Rest.getRest().getProductsFromLocation(Rest.token, l).enqueue(new Callback<Location>() {
+            @Override
+            public void onResponse(Call<Location> call, Response<Location> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    location = response.body();
+                    showDialog();
+                } else {
+                    Toast.makeText(getContext(), "Brak produktów na tej lokalizacji", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Location> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!ORDER_RESULT_CODE.equals("")){
+            getInfoAboutLocation();
+        }
+        ORDER_RESULT_CODE = "";
+    }
 }

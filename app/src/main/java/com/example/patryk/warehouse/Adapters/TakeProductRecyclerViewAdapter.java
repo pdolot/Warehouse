@@ -11,26 +11,25 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.patryk.warehouse.Objects.Order;
-import com.example.patryk.warehouse.Objects.OrderedProduct;
-import com.example.patryk.warehouse.Objects.ProductToTake;
+import com.example.patryk.warehouse.Models.ProductToTake;
 import com.example.patryk.warehouse.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TakeProductRecyclerViewAdapter extends RecyclerView.Adapter<TakeProductRecyclerViewAdapter.ViewHolder> {
 
     private List<ProductToTake> products;
-    private double values[];
+    private int values[];
     private Context context;
-    public TakeProductRecyclerViewAdapter(List<ProductToTake> products, Context context) {
+    private boolean ordered;
+    public TakeProductRecyclerViewAdapter(List<ProductToTake> products, Context context, boolean ordered) {
         this.products = products;
         this.context = context;
+        this.ordered = ordered;
 
-        values = new double[products.size()];
+        values = new int[products.size()];
         for(int i = 0; i < products.size();i++){
-            values[i] = 0.0;
+            values[i] = products.get(i).getCount();
         }
     }
 
@@ -47,8 +46,21 @@ public class TakeProductRecyclerViewAdapter extends RecyclerView.Adapter<TakePro
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
         final ProductToTake product = products.get(i);
         viewHolder.product_name.setText(product.getProduct().getProduct().getName());
-        viewHolder.productCount.setText(String.valueOf(product.getCountOnLocation()) + " szt");
-        viewHolder.toTake.setText("Do wzięcia " + String.valueOf(product.getProduct().getCount()) + " szt");
+        viewHolder.productCount.setText(" / " + String.valueOf(product.getProduct().getState()) + " szt");
+        if(ordered){
+            viewHolder.toTake.setText("Do wzięcia " + String.valueOf(product.getCount()) + " szt");
+        }else{
+            viewHolder.toTake.setVisibility(View.GONE);
+        }
+
+        if(i == products.size() - 1){
+            viewHolder.separator.setVisibility(View.GONE);
+        }
+
+        viewHolder.expiry_date.setText(product.getProduct().getExpiryDate().substring(0,10));
+
+        viewHolder.edit_productCount.setText(String.valueOf(product.getTookCount()));
+        viewHolder.edit_productCount.setSelection(viewHolder.edit_productCount.getText().length());
 
         viewHolder.edit_productCount.addTextChangedListener(new TextWatcher() {
             @Override
@@ -60,8 +72,16 @@ public class TakeProductRecyclerViewAdapter extends RecyclerView.Adapter<TakePro
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if(s.length() != 0){
                     String text = s.toString();
-                    double value = Double.valueOf(text);
-                    values[i] = value;
+                    int value = Integer.valueOf(text);
+                    if(value > product.getCount()){
+                        viewHolder.edit_productCount.setText(String.valueOf(product.getCount()));
+                        viewHolder.edit_productCount.setSelection(viewHolder.edit_productCount.getText().length());
+                        value = product.getCount();
+                    }
+                    product.setTookCount(value);
+                }else{
+                    viewHolder.edit_productCount.setText("0");
+                    viewHolder.edit_productCount.setSelection(1);
                 }
             }
 
@@ -74,7 +94,7 @@ public class TakeProductRecyclerViewAdapter extends RecyclerView.Adapter<TakePro
 
     }
 
-    public double[] getValues() {
+    public int[] getValues() {
         return values;
     }
 
@@ -92,6 +112,8 @@ public class TakeProductRecyclerViewAdapter extends RecyclerView.Adapter<TakePro
         EditText edit_productCount;
         TextView productCount;
         TextView toTake;
+        TextView expiry_date;
+        View separator;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -103,6 +125,8 @@ public class TakeProductRecyclerViewAdapter extends RecyclerView.Adapter<TakePro
             edit_productCount = v.findViewById(R.id.tp_edit_productCount);
             productCount = v.findViewById(R.id.tp_productCount);
             toTake = v.findViewById(R.id.tp_to_take);
+            expiry_date = v.findViewById(R.id.tp_expiryDate);
+            separator = v.findViewById(R.id.tp_separator);
         }
     }
 

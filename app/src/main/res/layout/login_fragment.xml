@@ -18,7 +18,7 @@
             android:orientation="vertical"
             android:weightSum="2">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="290sp"
                 android:elevation="10dp">
@@ -30,7 +30,16 @@
                     android:scaleType="centerCrop"
                     android:src="@drawable/warehouseflat" />
 
-            </LinearLayout>
+                <ImageView
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="100sp"
+                    android:layout_height="60sp"
+                    android:tint="@color/viewPagerBackground"
+                    android:src="@drawable/ic_mps"
+                    android:scaleType="fitCenter"/>
+
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -98,6 +107,8 @@
             </LinearLayout>
 
         </LinearLayout>
+
+
     </ScrollView>
 
 

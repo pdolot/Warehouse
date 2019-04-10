@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.patryk.warehouse.Adapters.ViewPagerAdapter;
 import com.example.patryk.warehouse.BaseFragment.BaseFragment;
+import com.example.patryk.warehouse.Fragments.ViewPagerFragments.ChangeLocation.ChangeLocationBaseFragment;
 import com.example.patryk.warehouse.Fragments.ViewPagerFragments.Order.OrderBaseFragment;
 import com.example.patryk.warehouse.Fragments.ViewPagerFragments.Search.SearchBaseFragment;
 import com.example.patryk.warehouse.Fragments.ViewPagerFragments.Search.SearchFragment;
@@ -77,9 +78,9 @@ public class MainFragment extends BaseFragment implements ViewPager.OnPageChange
         viewPagerAdapter = new ViewPagerAdapter(getFragmentManager());
         viewPagerAdapter.addFragment(SearchBaseFragment.newInstance(),"Wyszukaj produkt");
         viewPagerAdapter.addFragment(OrderBaseFragment.newInstance(),"Zlecenia");
-        viewPagerAdapter.addFragment(SearchFragment.newInstance(),"Zmień lokalizację");
-        viewPagerAdapter.addFragment(SearchFragment.newInstance(),"Zwroty");
-        viewPagerAdapter.addFragment(SearchFragment.newInstance(),"Lokalizację");
+        viewPagerAdapter.addFragment(ChangeLocationBaseFragment.newInstance(),"Zmień lokalizację");
+        viewPagerAdapter.addFragment(OrderBaseFragment.newInstance(),"Zwroty");
+        viewPagerAdapter.addFragment(OrderBaseFragment.newInstance(),"Dostawy");
     }
 
     private void initViewPager(int startPosition){

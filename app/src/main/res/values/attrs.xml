@@ -6,5 +6,12 @@
         <attr name="iconColor" format="color"/>
         <attr name="iconLeft" format="reference"/>
         <attr name="outlineColor" format="color"/>
+
+        <attr name="progressStrokeWidth" format="integer"/>
+        <attr name="progressBackgroundColor" format="color"/>
+        <attr name="progressFirstColor" format="color"/>
+        <attr name="progressSecondColor" format="color"/>
+        <attr name="progress" format="integer"/>
+        <attr name="angleMAX" format="integer"/>
     </declare-styleable>
 </resources>

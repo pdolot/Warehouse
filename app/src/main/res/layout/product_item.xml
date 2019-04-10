@@ -2,16 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/backgroundColor"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <LinearLayout
+        android:layout_margin="1dp"
         android:padding="8dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/field_background"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:elevation="0.5dp">
 
         <ImageView
             android:id="@+id/product_icon"
@@ -57,9 +58,4 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/separatorColor" />
 </LinearLayout>

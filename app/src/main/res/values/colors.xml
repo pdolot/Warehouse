@@ -16,7 +16,9 @@
     <color name="titleColor">#12202b</color>
     <color name="viewPagerBackground">#f1f1f1</color>
     <color name="itemBackground">#f5f5f5</color>
-    <color name="separatorColor">#cacaca</color>
+    <color name="separatorColor">#dfdfdf</color>
     <color name="buttonBackground">#d9d9d9</color>
     <color name="transparent">#00ffffff</color>
+    <color name="hintColor">#9e9e9e</color>
+    <color name="possitive">#30A138</color>
 </resources>

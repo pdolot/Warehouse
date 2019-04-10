@@ -4,10 +4,16 @@
     <string name="recipient">Odbiorca</string>
     <string name="departure_date">Data dostawy</string>
     <string name="target_location">Adres dostawy</string>
-    <string name="pallets_positions">Palety / Pozycje</string>
+    <string name="positions">Ilość produktów</string>
+    <string name="pallets">Ilość palet</string>
     <string name="order_id">ID zamówienia</string>
     <string name="ramp">Rampa</string>
     <string name="product_name">Nazwa produktu</string>
     <string name="accept">Akceptuj</string>
     <string name="cancel">Anuluj</string>
+    <string name="inset_location">Podaj lokalizację</string>
+    <string name="cl_stepOne">Zeskanuj lub wpisz lokalizację, z której chcesz przenieść paletę</string>
+    <string name="cl_stepTwo">Zeskanuj lub wpisz lokalizację, na którą chcesz przenieść paletę</string>
+    <string name="cl_stepThree">Upewnij się, że wybrałeś poprawne lokalizacje, następnie kliknij przycisk <b>ZAMIEŃ PALETY</b></string>
+    <string name="expiry_date">Data ważności</string>
 </resources>

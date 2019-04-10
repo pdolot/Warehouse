@@ -97,7 +97,7 @@ public class FancyEditText extends android.support.v7.widget.AppCompatEditText i
         if (getText().length() > 0 && hasFocus()) {
             if (getInputType() == TYPE_PASSWORD) {
                 rightIcon = getResources().getDrawable(R.drawable.ic_visibilityoff, null);
-            } else if (passwordIsVisible == true) {
+            } else if (passwordIsVisible == true && getInputType() == TYPE_PASSWORD) {
                 rightIcon = getResources().getDrawable(R.drawable.ic_visibilityon, null);
             } else {
                 rightIcon = getResources().getDrawable(R.drawable.ic_remove, null);
@@ -170,11 +170,11 @@ public class FancyEditText extends android.support.v7.widget.AppCompatEditText i
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 if (event.getX() >= width - height && hasFocus()) {
-                    if (!passwordIsVisible) {
+                    if (!passwordIsVisible && getInputType() == TYPE_PASSWORD) {
                         passwordIsVisible = true;
                         setTransformationMethod(null);
                         setSelection(getText().length());
-                    } else if (passwordIsVisible) {
+                    } else if (passwordIsVisible && getInputType() == TYPE_PASSWORD) {
                         passwordIsVisible = false;
                         setTransformationMethod(new PasswordTransformationMethod());
                         setSelection(getText().length());

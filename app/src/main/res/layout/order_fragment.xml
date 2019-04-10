@@ -4,8 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:background="@color/backgroundColor">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,11 +44,13 @@
                     android:paddingEnd="16dp"
                     android:paddingStart="8dp">
                     <ImageView
+                        android:id="@+id/of_cancelOrderIcon"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:src="@drawable/ic_remove"
                         android:tint="#3d2f22"/>
                     <TextView
+                        android:id="@+id/of_cancelOrderText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="  PRZERWIJ ZAMÓWIENIE"
@@ -88,7 +89,6 @@
                             android:id="@+id/of_orderRecipient"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Kapselek"
                             android:textSize="16sp"
                             android:textColor="@color/backgroundColor"/>
                     </LinearLayout>
@@ -109,7 +109,6 @@
                             android:id="@+id/of_orderDepartureDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="04/04/2019"
                             android:textSize="16sp"
                             android:textColor="@color/backgroundColor"/>
                     </LinearLayout>
@@ -137,7 +136,6 @@
                             android:id="@+id/of_orderTargetLocation"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Łódź, Limanowskiego 432a"
                             android:textSize="16sp"
                             android:textColor="@color/backgroundColor"/>
                     </LinearLayout>
@@ -149,16 +147,15 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/pallets_positions"
+                            android:text="@string/positions"
                             android:textSize="12sp"
                             android:fontFamily="sans-serif-light"
                             android:textColor="@color/backgroundColor"/>
                         <TextView
                             android:paddingStart="8sp"
-                            android:id="@+id/of_orderProductsInfo"
+                            android:id="@+id/of_orderPositions"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="126 / 1.42"
                             android:textSize="16sp"
                             android:textColor="@color/backgroundColor"/>
                     </LinearLayout>
@@ -186,7 +183,6 @@
                             android:id="@+id/of_orderId"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="3241"
                             android:textSize="16sp"
                             android:textColor="@color/backgroundColor"/>
                     </LinearLayout>
@@ -198,16 +194,15 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/ramp"
+                            android:text="@string/pallets"
                             android:textSize="12sp"
                             android:fontFamily="sans-serif-light"
                             android:textColor="@color/backgroundColor"/>
                         <TextView
                             android:paddingStart="8sp"
-                            android:id="@+id/of_orderRamp"
+                            android:id="@+id/of_orderPallets"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="12"
                             android:textSize="16sp"
                             android:textColor="@color/backgroundColor"/>
                     </LinearLayout>

@@ -1,26 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
-    android:id="@+id/search_fragment">
+    android:padding="16dp">
 
-    <EditText
-        android:id="@+id/edit_tmp"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp">
 
-    <Button
-        android:id="@+id/scan"
-        android:layout_width="wrap_content"
-        android:layout_height="40sp"
-        android:text="SCAN"/>
+        <AutoCompleteTextView
+            android:id="@+id/sf_search"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:background="@drawable/search"
+            android:fontFamily="sans-serif-light"
+            android:hint="Szukaj produktu"
+            android:inputType="text"
+            android:paddingStart="46dp"
+            android:paddingEnd="46dp"
+            android:queryBackground="@color/transparent"
+            android:textColorHint="@color/hintColor" />
+
+        <ImageView
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_alignParentStart="true"
+            android:padding="8dp"
+            android:src="@drawable/ic_search"
+            android:tint="@color/hintColor" />
+
+        <ImageView
+            android:id="@+id/sf_scanner"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_barcode_background" />
+
+    </RelativeLayout>
 
     <TextView
-        android:id="@+id/code"
-        android:textSize="20sp"
-        android:layout_marginTop="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:id="@+id/productExist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center"
+        android:text="Brak produktu na magazynie"
+        android:textColor="@color/hintColor"
+        android:textSize="16sp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+        <LinearLayout
+            android:elevation="1dp"
+            android:background="@drawable/field_background"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="1dp"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/sf_productCategory"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/ic_beer" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/sf_productName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:textColor="@color/textColor"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:layout_weight="0.5"
+                            android:id="@+id/sf_productLocation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:fontFamily="sans-serif-light"
+                            android:textColor="@color/textColor"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_weight="0.5"
+                            android:id="@+id/sf_productCount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:fontFamily="sans-serif-light"
+                            android:textColor="@color/textColor"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_marginTop="16dp"
+                android:paddingStart="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dostępność na magazynie:"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/titleColor"
+                android:textSize="16sp"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/sf_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/serialized_product_item"/>
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
 </LinearLayout>

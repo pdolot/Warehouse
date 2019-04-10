@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_weight="0.5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Data ważności:"
+                        android:textSize="12sp"
+                        android:textColor="@color/titleColor"/>
+                    <TextView
+                        android:id="@+id/s_product_expiryDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="10/04/2019"
+                        android:paddingStart="4dp"
+                        android:fontFamily="sans-serif-light"
+                        android:textColor="@color/textColor"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_weight="0.5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ilość:"
+                        android:textSize="12sp"
+                        android:textColor="@color/titleColor"/>
+                    <TextView
+                        android:id="@+id/s_product_count"
+                        android:paddingStart="4dp"
+                        android:layout_weight="0.5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="24 szt/ 6 zgrz"
+                        android:fontFamily="sans-serif-light"
+                        android:textColor="@color/textColor"/>
+                </LinearLayout>
+
+            </LinearLayout>
+            <TextView
+                android:layout_marginTop="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lokalizacje:"
+                android:textSize="12sp"
+                android:textColor="@color/titleColor"/>
+
+            <TextView
+                android:id="@+id/s_product_locations"
+                android:layout_weight="0.5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="328423"
+                android:paddingStart="4dp"
+                android:fontFamily="sans-serif-light"
+                android:textColor="@color/textColor"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/separator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/separatorColor" />
+</LinearLayout>

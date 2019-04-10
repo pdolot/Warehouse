@@ -3,17 +3,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_orders"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/of_swipeLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/order_item"></android.support.v7.widget.RecyclerView>
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/tmp_button"
-        android:layout_width="match_parent"
-        android:layout_height="40sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/ordersExist"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:text="Brak zleceń"
+                android:textColor="@color/hintColor"
+                android:textSize="16sp" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_orders"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/order_item"></android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+
+
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
 
 </LinearLayout>
