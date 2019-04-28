@@ -17,6 +17,8 @@ import com.example.patryk.warehouse.REST.Rest;
 
 public class StartActivity extends AppCompatActivity implements FragmentNavigation {
 
+    // Start
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
