@@ -1,4 +1,4 @@
-package com.example.patryk.warehouse;
+package com.example.patryk.warehouse.Components;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -15,6 +15,8 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
 import android.view.View;
+
+import com.example.patryk.warehouse.R;
 
 public class ProgressArrow extends View {
 

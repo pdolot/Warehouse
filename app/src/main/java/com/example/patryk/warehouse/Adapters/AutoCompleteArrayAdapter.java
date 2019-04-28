@@ -8,8 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.patryk.warehouse.Fragments.ViewPagerFragments.Search.SearchFragment;
 import com.example.patryk.warehouse.Models.Product;
 import com.example.patryk.warehouse.R;
 
@@ -19,7 +21,6 @@ import java.util.List;
 public class AutoCompleteArrayAdapter extends ArrayAdapter<Product> {
 
     private List<Product> productsList;
-
 
     public AutoCompleteArrayAdapter(@NonNull Context context) {
         super(context, 0);
@@ -35,6 +36,7 @@ public class AutoCompleteArrayAdapter extends ArrayAdapter<Product> {
         return productFilter;
     }
 
+
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -45,11 +47,27 @@ public class AutoCompleteArrayAdapter extends ArrayAdapter<Product> {
         }
 
         TextView name = convertView.findViewById(R.id.ac_r_name);
-
+        ImageView icon = convertView.findViewById(R.id.ac_r_icon);
         Product product = getItem(position);
 
         if (product != null) {
             name.setText(product.getProducer() + ", " + product.getName());
+            String category = product.getCategory();
+            if (category.equals("Piwo")) {
+                icon.setImageResource(R.drawable.ic_beer);
+            } else if (category.equals("Wino")) {
+                icon.setImageResource(R.drawable.ic_wine);
+            } else if (category.equals("Wódka")) {
+                icon.setImageResource(R.drawable.ic_vodka);
+            } else if (category.equals("Wody")) {
+                icon.setImageResource(R.drawable.ic_water);
+            } else if (category.equals("Małe soki")) {
+                icon.setImageResource(R.drawable.ic_juice_s);
+            } else if (category.equals("Soki (Karton)")) {
+                icon.setImageResource(R.drawable.ic_juice_k);
+            } else if (category.equals("Soki PET")) {
+                icon.setImageResource(R.drawable.ic_juice_b);
+            }
         }
 
         return convertView;
@@ -69,14 +87,14 @@ public class AutoCompleteArrayAdapter extends ArrayAdapter<Product> {
                 for (Product p : productsList) {
                     if (p.getName().toLowerCase().contains(filterPattern)
                             || p.getBarCode().toLowerCase().contains(filterPattern)
-                            || p.getProducer().toLowerCase().contains(filterPattern)) {
+                            || p.getProducer().toLowerCase().contains(filterPattern)
+                            || p.getFullName().toLowerCase().contains(filterPattern)) {
                         suggestions.add(p);
                     }
                 }
             }
             results.values = suggestions;
             results.count = suggestions.size();
-
             return results;
         }
 
@@ -90,6 +108,7 @@ public class AutoCompleteArrayAdapter extends ArrayAdapter<Product> {
         @Override
         public CharSequence convertResultToString(Object resultValue) {
             return ((Product) resultValue).getProducer() + ", " +((Product) resultValue).getName();
+
         }
     };
 }

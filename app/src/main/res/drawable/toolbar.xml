@@ -5,7 +5,7 @@
             <corners
                 android:bottomLeftRadius="15dp"
                 android:bottomRightRadius="15dp" />
-            <solid android:color="@color/separatorColor" />
+            <solid android:color="@color/silverDark" />
         </shape>
     </item>
     <item android:bottom="1dp">
@@ -13,7 +13,7 @@
             <corners
                 android:bottomLeftRadius="15dp"
                 android:bottomRightRadius="15dp" />
-            <solid android:color="@color/editColor" />
+            <solid android:color="@color/primary" />
         </shape>
     </item>
 

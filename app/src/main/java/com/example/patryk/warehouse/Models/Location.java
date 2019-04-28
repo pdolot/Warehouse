@@ -2,9 +2,10 @@ package com.example.patryk.warehouse.Models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Location {
+public class Location implements Serializable {
 
     @SerializedName("id")
     private Long ID;

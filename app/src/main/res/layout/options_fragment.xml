@@ -3,8 +3,9 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_gravity="start"
-    android:background="@color/backgroundColor"
+    android:background="@drawable/options_background"
     android:orientation="vertical"
+    android:layout_marginEnd="2dp"
     android:weightSum="1">
 
     <LinearLayout
@@ -16,8 +17,7 @@
         android:paddingTop="24dp"
         android:paddingBottom="24dp"
         android:orientation="vertical"
-        android:gravity="center"
-        android:elevation="4dp">
+        android:gravity="center">
 
         <ImageView
             android:layout_width="104dp"
@@ -33,14 +33,14 @@
                     android:id="@+id/of_userName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/backgroundColor"
+                    android:textColor="@color/silverLight"
                     android:text="Patryk Doleciński"
                     android:textSize="20sp" />
                 <TextView
                     android:id="@+id/of_userID"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/backgroundColor"
+                    android:textColor="@color/silverLight"
                     android:text="ID Pracownika: 242543"
                     android:textSize="16sp"
                     android:fontFamily="sans-serif-light"/>
@@ -54,25 +54,17 @@
 
         <TextView
             android:layout_marginTop="6dp"
-            android:id="@+id/of_orderCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/backgroundColor"
-            android:text="Liczba wykonanych zleceń: 9"
-            android:textSize="14sp"
-            android:fontFamily="sans-serif-light"/>
-        <TextView
-            android:layout_marginTop="6dp"
             android:id="@+id/of_userWorkHours"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/backgroundColor"
+            android:textColor="@color/silverLight"
             android:text="Godziny pracy: 06:00-14:00"
             android:textSize="14sp"
             android:fontFamily="sans-serif-light"/>
     </LinearLayout>
 
     <ScrollView
+        android:scrollbars="none"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
@@ -97,7 +89,7 @@
                     android:layout_width="36sp"
                     android:layout_height="36dp"
                     android:src="@drawable/ic_search"
-                    android:tint="@color/iconColor"/>
+                    android:tint="@color/primary"/>
                 <TextView
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.5"
@@ -106,7 +98,7 @@
                     android:text="Wyszukaj produkt"
                     android:textSize="18sp"
                     android:fontFamily="sans-serif-light"
-                    android:textColor="@color/textColor"/>
+                    android:textColor="@color/primaryDark"/>
 
             </LinearLayout>
             <LinearLayout
@@ -125,7 +117,7 @@
                     android:layout_width="36sp"
                     android:layout_height="36dp"
                     android:src="@drawable/ic_orders"
-                    android:tint="@color/iconColor"/>
+                    android:tint="@color/primary"/>
                 <TextView
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.5"
@@ -134,7 +126,7 @@
                     android:text="Zlecenia"
                     android:textSize="18sp"
                     android:fontFamily="sans-serif-light"
-                    android:textColor="@color/textColor"/>
+                    android:textColor="@color/primaryDark"/>
 
             </LinearLayout>
             <LinearLayout
@@ -153,7 +145,7 @@
                     android:layout_width="36sp"
                     android:layout_height="36dp"
                     android:src="@drawable/ic_change"
-                    android:tint="@color/iconColor"/>
+                    android:tint="@color/primary"/>
                 <TextView
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.5"
@@ -162,7 +154,7 @@
                     android:text="Zmień lokalizację"
                     android:textSize="18sp"
                     android:fontFamily="sans-serif-light"
-                    android:textColor="@color/textColor"/>
+                    android:textColor="@color/primaryDark"/>
 
             </LinearLayout>
             <LinearLayout
@@ -180,17 +172,17 @@
                 <ImageView
                     android:layout_width="36sp"
                     android:layout_height="36dp"
-                    android:src="@drawable/ic_returns"
-                    android:tint="@color/iconColor"/>
+                    android:src="@drawable/ic_delivery"
+                    android:tint="@color/primary"/>
                 <TextView
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Zwroty"
+                    android:text="Zwroty / Dostawy"
                     android:textSize="18sp"
                     android:fontFamily="sans-serif-light"
-                    android:textColor="@color/textColor"/>
+                    android:textColor="@color/primaryDark"/>
 
             </LinearLayout>
             <LinearLayout
@@ -208,17 +200,17 @@
                 <ImageView
                     android:layout_width="36sp"
                     android:layout_height="36dp"
-                    android:src="@drawable/ic_delivery"
-                    android:tint="@color/iconColor"/>
+                    android:src="@drawable/ic_stats"
+                    android:tint="@color/primary"/>
                 <TextView
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dostawy"
+                    android:text="Dziennik pracownika"
                     android:textSize="18sp"
                     android:fontFamily="sans-serif-light"
-                    android:textColor="@color/textColor"/>
+                    android:textColor="@color/primaryDark"/>
 
             </LinearLayout>
             <LinearLayout
@@ -236,8 +228,10 @@
                 <ImageView
                     android:layout_width="36sp"
                     android:layout_height="36dp"
-                    android:src="@drawable/ic_remove"
-                    android:tint="@color/iconColor"/>
+                    android:src="@drawable/ic_arrowleft"
+                    android:scaleX="1.25"
+                    android:scaleY="1.25"
+                    android:tint="@color/primary"/>
                 <TextView
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.5"
@@ -246,7 +240,7 @@
                     android:text="Wyloguj"
                     android:textSize="18sp"
                     android:fontFamily="sans-serif-light"
-                    android:textColor="@color/textColor"/>
+                    android:textColor="@color/primaryDark"/>
 
             </LinearLayout>
         </LinearLayout>

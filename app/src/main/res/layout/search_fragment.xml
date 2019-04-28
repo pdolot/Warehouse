@@ -20,17 +20,20 @@
             android:hint="Szukaj produktu"
             android:inputType="text"
             android:paddingStart="46dp"
-            android:paddingEnd="46dp"
-            android:queryBackground="@color/transparent"
-            android:textColorHint="@color/hintColor" />
+            android:popupBackground="@color/transparent"
+            android:popupElevation="0dp"
+            android:dropDownVerticalOffset="0dp"
+            android:dropDownAnchor="@id/sf_search"
+            android:paddingEnd="46dp" />
 
         <ImageView
+            android:id="@+id/sf_seach_button"
             android:layout_width="46dp"
             android:layout_height="46dp"
             android:layout_alignParentStart="true"
             android:padding="8dp"
             android:src="@drawable/ic_search"
-            android:tint="@color/hintColor" />
+            android:tint="@color/gray" />
 
         <ImageView
             android:id="@+id/sf_scanner"
@@ -38,18 +41,18 @@
             android:layout_height="46dp"
             android:layout_alignParentEnd="true"
             android:src="@drawable/ic_barcode_background" />
-
     </RelativeLayout>
 
     <TextView
+        android:visibility="visible"
         android:id="@+id/productExist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fontFamily="sans-serif-light"
         android:gravity="center"
         android:text="Brak produktu na magazynie"
-        android:textColor="@color/hintColor"
-        android:textSize="16sp" />
+        android:textColor="@color/gray"
+        android:textSize="18sp" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -86,7 +89,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
-                        android:textColor="@color/textColor"
+                        android:textColor="@color/primaryDark"
                         android:textSize="16sp" />
 
                     <LinearLayout
@@ -102,7 +105,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:fontFamily="sans-serif-light"
-                            android:textColor="@color/textColor"
+                            android:textColor="@color/primaryDark"
                             android:textSize="14sp" />
 
                         <TextView
@@ -112,7 +115,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:fontFamily="sans-serif-light"
-                            android:textColor="@color/textColor"
+                            android:textColor="@color/primaryDark"
                             android:textSize="14sp" />
 
                     </LinearLayout>
@@ -126,7 +129,7 @@
                 android:layout_height="wrap_content"
                 android:text="Dostępność na magazynie:"
                 android:fontFamily="sans-serif"
-                android:textColor="@color/titleColor"
+                android:textColor="@color/text"
                 android:textSize="16sp"/>
 
             <android.support.v7.widget.RecyclerView
@@ -136,8 +139,4 @@
                 tools:listitem="@layout/serialized_product_item"/>
         </LinearLayout>
     </ScrollView>
-
-
-
-
 </LinearLayout>

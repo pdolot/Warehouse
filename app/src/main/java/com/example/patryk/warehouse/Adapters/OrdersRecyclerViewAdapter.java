@@ -1,11 +1,13 @@
 package com.example.patryk.warehouse.Adapters;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.patryk.warehouse.Models.Order;
@@ -40,6 +42,20 @@ public class OrdersRecyclerViewAdapter extends RecyclerView.Adapter<OrdersRecycl
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Order order = orders.get(i);
+        String yyyy = order.getDepartureDate().substring(0,4);
+        String ddMM = order.getDepartureDate().substring(5,10).replace("-","/");
+
+        Resources res = context.getResources();
+
+        if(order.getNumberOfPallets() >= 0 && order.getNumberOfPallets() < 0.5){
+            viewHolder.circle.setBackground(res.getDrawable(R.drawable.circle_easy,null));
+        }else if(order.getNumberOfPallets() >= 0.5 && order.getNumberOfPallets() < 1){
+            viewHolder.circle.setBackground(res.getDrawable(R.drawable.circle_medium,null));
+        }else if(order.getNumberOfPallets() >= 1){
+            viewHolder.circle.setBackground(res.getDrawable(R.drawable.circle_hard,null));
+        }
+        viewHolder.departureDate_yyyy.setText(yyyy);
+        viewHolder.departureDate_ddMM.setText(ddMM);
         viewHolder.recipient.setText(order.getRecipient().getName());
         viewHolder.targetLocation.setText(order.getRecipient().getAddress());
     }
@@ -64,6 +80,7 @@ public class OrdersRecyclerViewAdapter extends RecyclerView.Adapter<OrdersRecycl
         TextView targetLocation;
         TextView departureDate_ddMM;
         TextView departureDate_yyyy;
+        LinearLayout circle;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -76,6 +93,7 @@ public class OrdersRecyclerViewAdapter extends RecyclerView.Adapter<OrdersRecycl
             targetLocation = v.findViewById(R.id.oi_targetLocation);
             departureDate_ddMM = v.findViewById(R.id.oi_date_ddMM);
             departureDate_yyyy = v.findViewById(R.id.oi_date_yyyy);
+            circle = v.findViewById(R.id.oi_circle);
         }
 
         @Override

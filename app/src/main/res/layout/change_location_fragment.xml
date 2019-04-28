@@ -28,7 +28,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Krok 1"
-                    android:textColor="@color/titleColor"
+                    android:textColor="@color/text"
                     android:textSize="12dp"
                     android:fontFamily="sans-serif-light"/>
                 <TextView
@@ -36,7 +36,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/cl_stepOne"
-                    android:textColor="@color/textColor"
+                    android:textColor="@color/primaryDark"
                     android:textSize="16dp"
                     android:paddingStart="8dp"
                     android:paddingEnd="8dp"
@@ -52,16 +52,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="16dp">
-                    <com.example.patryk.warehouse.ProgressArrow
+                    <com.example.patryk.warehouse.Components.ProgressArrow
                         android:layout_gravity="center"
                         android:id="@+id/second_bar"
                         android:layout_width="match_parent"
                         android:layout_height="280sp"
                         android:layout_centerInParent="true"
                         android:paddingLeft="15sp"
-                        app:progressBackgroundColor="@color/separatorColor"
+                        app:progressBackgroundColor="@color/grayLight"
                         app:progress="0"
-                        app:progressFirstColor="@color/iconColor"
+                        app:progressFirstColor="@color/primary"
                         app:progressStrokeWidth="30"
                         app:angleMAX="140"/>
                 </RelativeLayout>
@@ -77,7 +77,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="18sp"
-                        android:textColor="@color/iconColor"/>
+                        android:textColor="@color/primaryDark"/>
 
                     <LinearLayout
                         android:visibility="invisible"
@@ -99,13 +99,13 @@
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:src="@drawable/ic_accept"
-                            android:tint="@color/backgroundColor"/>
+                            android:tint="@color/silverLight"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="  ZAMIEŃ PALETY"
                             android:textSize="16sp"
-                            android:textColor="@color/backgroundColor"/>
+                            android:textColor="@color/silverLight"/>
                     </LinearLayout>
 
                     <TextView
@@ -113,23 +113,23 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="18sp"
-                        android:textColor="@color/textColor"/>
+                        android:textColor="@color/primaryDark"/>
                 </LinearLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:rotation="180">
-                    <com.example.patryk.warehouse.ProgressArrow
+                    <com.example.patryk.warehouse.Components.ProgressArrow
                         android:layout_gravity="center"
                         android:id="@+id/first_bar"
                         android:layout_width="match_parent"
                         android:layout_height="280sp"
                         android:layout_centerInParent="true"
                         android:paddingLeft="15sp"
-                        app:progressBackgroundColor="@color/separatorColor"
+                        app:progressBackgroundColor="@color/grayLight"
                         app:progress="0"
-                        app:progressFirstColor="@color/textColor"
+                        app:progressFirstColor="@color/primary"
                         app:progressStrokeWidth="30"
                         app:angleMAX="140"/>
                 </RelativeLayout>
@@ -141,39 +141,39 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:layout_marginTop="32dp">
+                android:layout_marginTop="16dp">
 
                 <ImageView
                     android:layout_marginStart="32dp"
                     android:id="@+id/cl_firstDot"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:scaleY="0.5"
-                    android:scaleX="0.5"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:scaleY="0.25"
+                    android:scaleX="0.25"
                     android:src="@drawable/oval"/>
 
                 <ImageView
                     android:clickable="false"
                     android:id="@+id/cl_secondDot"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
                     android:src="@drawable/oval"
-                    android:tint="@color/separatorColor"
+                    android:tint="@color/grayLight"
                     android:layout_marginStart="32dp"
                     android:layout_marginEnd="32dp"
-                    android:scaleY="0.25"
-                    android:scaleX="0.25"/>
+                    android:scaleY="0.125"
+                    android:scaleX="0.125"/>
 
                 <ImageView
                     android:clickable="false"
                     android:id="@+id/cl_thirdDot"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
                     android:src="@drawable/oval"
-                    android:tint="@color/separatorColor"
+                    android:tint="@color/grayLight"
                     android:layout_marginEnd="32dp"
-                    android:scaleY="0.25"
-                    android:scaleX="0.25"/>
+                    android:scaleY="0.125"
+                    android:scaleX="0.125"/>
 
             </LinearLayout>
         </LinearLayout>
@@ -201,7 +201,7 @@
             android:layout_width="250dp"
             android:layout_height="46dp"
             android:layout_marginLeft="-36dp"
-            android:background="@color/buttonBackground"
+            android:background="@color/silverDark"
             android:gravity="center"
             android:orientation="horizontal"
             android:translationZ="-1dp"
@@ -234,7 +234,7 @@
                 android:layout_width="42dp"
                 android:layout_height="46dp"
                 android:src="@drawable/ic_arrowright"
-                android:tint="@color/iconColor"
+                android:tint="@color/primary"
                 android:translationZ="-1dp" />
         </LinearLayout>
     </LinearLayout>

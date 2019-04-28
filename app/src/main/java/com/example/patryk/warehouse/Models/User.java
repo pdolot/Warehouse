@@ -2,42 +2,63 @@ package com.example.patryk.warehouse.Models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class User {
-    @SerializedName("username")
-    private String username;
+import java.io.Serializable;
 
-    @SerializedName("password")
-    private String userPassword;
+public class User implements Serializable {
 
-    @SerializedName("token")
-    private String token;
+    @SerializedName("id")
+    private Long id;
 
-    public String getToken() {
-        return token;
+    @SerializedName("firstname")
+    private String firstName;
+
+    @SerializedName("lastname")
+    private String lastName;
+
+    @SerializedName("workingHours")
+    private String workingHours;
+
+    public Long getId() {
+        return id;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public User(String username, String userPassword) {
-        this.username = username;
-        this.userPassword = userPassword;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getUsername() {
-        return username;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getLastName() {
+        return lastName;
     }
 
-    public String getUserPassword() {
-        return userPassword;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+    public String getWorkingHours() {
+        return workingHours;
+    }
+
+    public void setWorkingHours(String workingHours) {
+        this.workingHours = workingHours;
+    }
+
+    public int getStartWorkHour() {
+        return Integer.valueOf(workingHours.substring(0,2));
+    }
+
+    public int getEndWorkHour() {
+        return Integer.valueOf(workingHours.substring(3,5));
+    }
+
+    public String getUserWorkHours(){
+        return String.format("%02d",this.getStartWorkHour())+":00-"+String.format("%02d",this.getEndWorkHour())+":00";
     }
 }

@@ -3,11 +3,12 @@ package com.example.patryk.warehouse.Models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Product {
+public class Product implements Serializable {
     @SerializedName("id")
     private Long id;
 
@@ -40,6 +41,10 @@ public class Product {
 
     @SerializedName("products")
     private List<SerializedProduct> serializedProducts;
+
+    public String getFullName(){
+        return producer + ", " + name;
+    }
 
     public Product() {
     }

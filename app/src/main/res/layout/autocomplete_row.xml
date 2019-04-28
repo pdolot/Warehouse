@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="16dp">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:minHeight="46dp"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:padding="8dp"
+        android:id="@+id/ac_r_icon"
+        android:layout_width="46dp"
+        android:layout_height="46dp" />
     <TextView
+        android:layout_centerVertical="true"
+        android:paddingStart="46dp"
         android:id="@+id/ac_r_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tyskie gronie"
         android:fontFamily="sans-serif-light"
-        android:textColor="@color/titleColor"
+        android:textColor="@color/text"
         android:textSize="16sp"/>
-</LinearLayout>
+</RelativeLayout>

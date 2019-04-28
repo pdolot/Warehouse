@@ -2,11 +2,12 @@ package com.example.patryk.warehouse.Models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class SerializedProduct {
+public class SerializedProduct implements Serializable {
 
     @SerializedName("locations")
     private List<Location> locations;

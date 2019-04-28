@@ -1,4 +1,4 @@
-package com.example.patryk.warehouse;
+package com.example.patryk.warehouse.Components;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -17,6 +17,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.patryk.warehouse.R;
 
 public class FancyEditText extends android.support.v7.widget.AppCompatEditText implements View.OnTouchListener {
 

@@ -1,12 +1,15 @@
 package com.example.patryk.warehouse.Fragments;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -16,15 +19,27 @@ import com.example.patryk.warehouse.BaseFragment.BaseFragment;
 import com.example.patryk.warehouse.Fragments.ViewPagerFragments.ChangeLocation.ChangeLocationBaseFragment;
 import com.example.patryk.warehouse.Fragments.ViewPagerFragments.Order.OrderBaseFragment;
 import com.example.patryk.warehouse.Fragments.ViewPagerFragments.Search.SearchBaseFragment;
-import com.example.patryk.warehouse.Fragments.ViewPagerFragments.Search.SearchFragment;
+import com.example.patryk.warehouse.Fragments.ViewPagerFragments.Supply.SupplyBaseFragment;
+import com.example.patryk.warehouse.Fragments.ViewPagerFragments.UserInfo.UserInfoFragment;
+import com.example.patryk.warehouse.Models.User;
 import com.example.patryk.warehouse.R;
+import com.example.patryk.warehouse.REST.Rest;
+import com.example.patryk.warehouse.Components.mViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainFragment extends BaseFragment implements ViewPager.OnPageChangeListener,View.OnClickListener {
 
-    private ViewPager viewPager;
+    private static String USER = "USER";
+    public static User user;
+    private mViewPager viewPager;
     private ViewPagerAdapter viewPagerAdapter;
     private TextView fragmentTitle;
     private RelativeLayout optionsButton;
@@ -36,21 +51,71 @@ public class MainFragment extends BaseFragment implements ViewPager.OnPageChange
     private LinearLayout dailyStats;
     private LinearLayout logout;
     private List<LinearLayout> options = new ArrayList<>();
+    private TextView userName, userId, userWorkHours;
 
-    public static MainFragment newInstance() {
+    private TextView orderCount;
+    private ImageView countBackground;
+    private String count = "0";
 
-        return new MainFragment();
+    public static MainFragment newInstance(User user) {
+        Bundle args = new Bundle();
+        args.putSerializable(USER,user);
+        MainFragment fragment = new MainFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        user = (User) getArguments().getSerializable(USER);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_fragment, container, false);
         findViews(view);
+        setLabels();
         initFragments();
         initViewPager(0);
         setOnClickListeners();
         setElevation(0);
+        getOrdersCount();
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        getOrdersCount();
+                    }
+                });
+            }
+        }, 0, 120000);
         return view;
+    }
+
+    private void getOrdersCount(){
+        Rest.getRest().getOrdersCount(Rest.token).enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if(response.isSuccessful() && response.body() != null){
+                    count = response.body();
+                    orderCount.setText(count);
+                    if(count.equals("0")){
+                        countBackground.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.possitive,null)));
+                    }else{
+                        countBackground.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.primaryDark,null)));
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
     }
 
     private void findViews(View v){
@@ -65,6 +130,13 @@ public class MainFragment extends BaseFragment implements ViewPager.OnPageChange
         delivery = v.findViewById(R.id.of_delivery);
         dailyStats = v.findViewById(R.id.of_dailyStats);
         logout = v.findViewById(R.id.of_logout);
+        orderCount = v.findViewById(R.id.mf_orderCount);
+        countBackground = v.findViewById(R.id.mf_count_background);
+
+        //user
+        userName = v.findViewById(R.id.of_userName);
+        userId = v.findViewById(R.id.of_userID);
+        userWorkHours = v.findViewById(R.id.of_userWorkHours);
 
         options.add(searchProduct);
         options.add(orders);
@@ -74,13 +146,19 @@ public class MainFragment extends BaseFragment implements ViewPager.OnPageChange
         options.add(logout);
     }
 
+    private void setLabels(){
+        userName.setText(user.getFirstName() + " " + user.getLastName());
+        userId.setText("ID Pracownika: " + String.valueOf(user.getId()));
+        userWorkHours.setText("Godziny pracy: " + user.getUserWorkHours());
+    }
+
     private void initFragments(){
         viewPagerAdapter = new ViewPagerAdapter(getFragmentManager());
         viewPagerAdapter.addFragment(SearchBaseFragment.newInstance(),"Wyszukaj produkt");
         viewPagerAdapter.addFragment(OrderBaseFragment.newInstance(),"Zlecenia");
         viewPagerAdapter.addFragment(ChangeLocationBaseFragment.newInstance(),"Zmień lokalizację");
-        viewPagerAdapter.addFragment(OrderBaseFragment.newInstance(),"Zwroty");
-        viewPagerAdapter.addFragment(OrderBaseFragment.newInstance(),"Dostawy");
+        viewPagerAdapter.addFragment(SupplyBaseFragment.newInstance(),"Zwroty / Dostawy");
+        viewPagerAdapter.addFragment(UserInfoFragment.newInstance(),"Dziennik pracownika");
     }
 
     private void initViewPager(int startPosition){
@@ -151,6 +229,7 @@ public class MainFragment extends BaseFragment implements ViewPager.OnPageChange
                 break;
             case R.id.of_logout:
                 drawerLayout.closeDrawer(Gravity.START);
+                getActivity().finish();
                 break;
         }
     }

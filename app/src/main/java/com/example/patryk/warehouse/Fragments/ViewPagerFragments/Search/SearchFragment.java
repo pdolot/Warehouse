@@ -1,5 +1,6 @@
 package com.example.patryk.warehouse.Fragments.ViewPagerFragments.Search;
 
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +10,8 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,6 +25,7 @@ import com.example.patryk.warehouse.Models.Product;
 import com.example.patryk.warehouse.Models.SerializedProduct;
 import com.example.patryk.warehouse.R;
 import com.example.patryk.warehouse.REST.Rest;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +42,7 @@ public class SearchFragment extends SearchBaseFragment implements View.OnClickLi
 
     public static String SEARCH_RESULT_CODE = "";
 
-    private ImageView scanner;
+    private ImageView scanner, searchButton;
     private AutoCompleteTextView search;
     private List<Product> products = new ArrayList<>();
     private AutoCompleteArrayAdapter autoCompleteArrayAdapter;
@@ -57,18 +61,16 @@ public class SearchFragment extends SearchBaseFragment implements View.OnClickLi
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        fetch_data();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.search_fragment, container, false);
-
         findViews(view);
-        setListeners();
-        fetch_data();
         setSerializedProductAdapter();
-        //setAdapter();
-
+        setListeners();
+        setAdapter();
         return view;
     }
 
@@ -82,11 +84,13 @@ public class SearchFragment extends SearchBaseFragment implements View.OnClickLi
         productName = v.findViewById(R.id.sf_productName);
         productStaticLocation = v.findViewById(R.id.sf_productLocation);
         productCount = v.findViewById(R.id.sf_productCount);
+        searchButton = v.findViewById(R.id.sf_seach_button);
     }
 
     private void setListeners() {
         scanner.setOnClickListener(this);
         search.addTextChangedListener(this);
+        searchButton.setOnClickListener(this);
     }
 
 
@@ -96,13 +100,54 @@ public class SearchFragment extends SearchBaseFragment implements View.OnClickLi
             case R.id.sf_scanner:
                 changeFragment(Scanner.newInstance("Search"), true);
                 break;
+            case R.id.sf_seach_button:
+                search();
+                break;
         }
     }
 
     private void setAdapter() {
         autoCompleteArrayAdapter = new AutoCompleteArrayAdapter(getContext());
+        search.setDropDownBackgroundResource(R.drawable.search_dropitems);
+        autoCompleteArrayAdapter.setProductsList(products);
         search.setAdapter(autoCompleteArrayAdapter);
         search.setThreshold(1);
+        autoCompleteArrayAdapter.registerDataSetObserver(new DataSetObserver() {
+            @Override
+            public void onChanged() {
+                if(autoCompleteArrayAdapter.getCount() > 0 && search.getText().length() > 0){
+                    search.setBackground(getResources().getDrawable(R.drawable.search_drop));
+                }else{
+                    search.setBackground(getResources().getDrawable(R.drawable.search));
+                }
+            }
+        });
+
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.length() == 0){
+                    search.setBackground(getResources().getDrawable(R.drawable.search));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        search.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                search.setBackground(getResources().getDrawable(R.drawable.search,null));
+            }
+        });
     }
 
     private void setSerializedProductAdapter() {
@@ -122,7 +167,7 @@ public class SearchFragment extends SearchBaseFragment implements View.OnClickLi
         search.requestFocus();
         search.setSelection(search.getText().length());
 
-        products.clear();
+        //products.clear();
     }
 
     private void fetch_data() {
@@ -133,8 +178,8 @@ public class SearchFragment extends SearchBaseFragment implements View.OnClickLi
                 if (response.isSuccessful() && response.body() != null) {
                     products.addAll(response.body());
                     //autoCompleteArrayAdapter.notifyDataSetChanged();
-                    setAdapter();
-                    autoCompleteArrayAdapter.setProductsList(products);
+                    //setAdapter();
+                    //autoCompleteArrayAdapter.setProductsList(products);
                 }
             }
 
@@ -147,15 +192,14 @@ public class SearchFragment extends SearchBaseFragment implements View.OnClickLi
 
     private void fetch_product(Long id) {
 
-        Id p = new Id();
-        p.setId(id);
-        Rest.getRest().getProduct(Rest.token, p).enqueue(new Callback<Product>() {
+        Id idd = new Id();
+        idd.setId(id);
+        Rest.getRest().getProduct(Rest.token, idd).enqueue(new Callback<Product>() {
             @Override
             public void onResponse(Call<Product> call, Response<Product> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Product p = response.body();
                     setProductLabels(p);
-
                     searchedProducts.clear();
                     searchedProducts.addAll(p.getSerializedProducts());
                     adapter.setQuantityInPackage(p.getQuantityInPackage());
@@ -164,12 +208,14 @@ public class SearchFragment extends SearchBaseFragment implements View.OnClickLi
                     if (productExist.getVisibility() != View.GONE) {
                         productExist.setVisibility(View.GONE);
                     }
+                }else {
+                    System.out.println("Blad");
                 }
             }
 
             @Override
             public void onFailure(Call<Product> call, Throwable t) {
-                Toast.makeText(getContext(), t.toString(), Toast.LENGTH_SHORT).show();
+
             }
         });
     }
@@ -219,6 +265,10 @@ public class SearchFragment extends SearchBaseFragment implements View.OnClickLi
 
     @Override
     public void afterTextChanged(Editable s) {
+        search();
+    }
+
+    private void search(){
         if (search.getText().toString().contains(",")) {
             String[] searchSplit = search.getText().toString().split(", ");
             if(searchSplit.length == 2){

@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <LinearLayout
-            android:background="@color/backgroundColor"
+            android:background="@color/silverLight"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:orientation="horizontal"
@@ -28,7 +28,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_options"
-                    android:tint="@color/iconColor"/>
+                    android:tint="@color/primaryDark"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -43,22 +43,38 @@
                     android:layout_centerInParent="true"
                     android:fontFamily="sans-serif-light"
                     android:textSize="18sp"
-                    android:textColor="@color/textColor"/>
+                    android:textColor="@color/primaryDark"/>
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.4"></RelativeLayout>
+                android:layout_weight="0.4"
+                android:padding="6dp">
+                <ImageView
+                    android:id="@+id/mf_count_background"
+                    android:layout_centerInParent="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/orders_count_background"/>
+                <TextView
+                    android:id="@+id/mf_orderCount"
+                    android:layout_centerInParent="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textStyle="bold"
+                    android:textColor="@color/silverLight"/>
+            </RelativeLayout>
         </LinearLayout>
 
-        <android.support.v4.view.ViewPager
+        <com.example.patryk.warehouse.Components.mViewPager
             android:id="@+id/mf_viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/viewPagerBackground">
-        </android.support.v4.view.ViewPager>
+            android:background="@color/silverMedium">
+        </com.example.patryk.warehouse.Components.mViewPager>
     </LinearLayout>
 
     <include

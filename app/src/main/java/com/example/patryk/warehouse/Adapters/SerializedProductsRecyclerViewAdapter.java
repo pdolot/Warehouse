@@ -14,6 +14,7 @@ import com.example.patryk.warehouse.Models.OrderedProduct;
 import com.example.patryk.warehouse.Models.Product;
 import com.example.patryk.warehouse.Models.SerializedProduct;
 import com.example.patryk.warehouse.R;
+import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -21,7 +22,7 @@ import java.util.List;
 public class SerializedProductsRecyclerViewAdapter extends RecyclerView.Adapter<SerializedProductsRecyclerViewAdapter.ViewHolder> {
 
     private List<SerializedProduct> products;
-    private int quantityInPackage;
+    private int quantityInPackage = 1;
     private Context context;
     public SerializedProductsRecyclerViewAdapter(List<SerializedProduct> products, Context context) {
         this.products = products;
@@ -51,10 +52,9 @@ public class SerializedProductsRecyclerViewAdapter extends RecyclerView.Adapter<
         if(i == products.size() - 1){
             viewHolder.separator.setVisibility(View.GONE);
         }
-
         SerializedProduct sp = products.get(i);
+        System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(sp));
         viewHolder.productCount.setText(sp.getState() + " szt. / " +  sp.getState()/quantityInPackage + " zgrz.");
-
         if(sp.getExpiryDate() != null){
             viewHolder.productDate.setText(sp.getExpiryDate().substring(0,10));
         }else{

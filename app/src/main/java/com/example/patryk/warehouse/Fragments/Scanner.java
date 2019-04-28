@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.example.patryk.warehouse.Fragments.ViewPagerFragments.ChangeLocation.ChangeLocationFragment;
 import com.example.patryk.warehouse.Fragments.ViewPagerFragments.Order.OrderFragment;
 import com.example.patryk.warehouse.Fragments.ViewPagerFragments.Search.SearchFragment;
+import com.example.patryk.warehouse.Fragments.ViewPagerFragments.Supply.SupplyFragment;
 import com.google.zxing.Result;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
@@ -53,7 +54,8 @@ public class Scanner extends Fragment implements ZXingScannerView.ResultHandler 
             }else{
                 ChangeLocationFragment.CHANGE_LOCATION_RESULT_CODE2 = rawResult.getText();
             }
-            
+        }else if(parentFragment.equals("Supply")){
+            SupplyFragment.SUPPLY_FRAGMENT_RESULT_CODE = rawResult.getText();
         }
         getFragmentManager().popBackStack();
     }

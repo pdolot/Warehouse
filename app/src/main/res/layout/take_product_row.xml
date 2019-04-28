@@ -3,23 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:gravity="center">
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#fff" />
+    android:gravity="center"
+    android:background="@color/silverMedium"
+    >
 
     <LinearLayout
+        android:padding="16dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="6dp">
+        android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/product_name"
-            android:textColor="@color/titleColor"
+            android:textColor="@color/text"
             android:fontFamily="sans-serif-light"
             android:textSize="12sp"/>
         <TextView
@@ -27,14 +24,14 @@
             android:paddingStart="6dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/textColor"
+            android:textColor="@color/primaryDark"
             android:textSize="18sp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/expiry_date"
-            android:textColor="@color/titleColor"
+            android:textColor="@color/text"
             android:fontFamily="sans-serif-light"
             android:textSize="12sp"/>
         <TextView
@@ -42,7 +39,7 @@
             android:paddingStart="6dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/textColor"
+            android:textColor="@color/primaryDark"
             android:textSize="18sp"/>
 
         <LinearLayout
@@ -60,7 +57,7 @@
                 android:layout_weight="0.5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/textColor"
+                android:textColor="@color/primaryDark"
                 android:fontFamily="sans-serif-light"
                 android:textSize="18sp"
                 android:text="0"
@@ -72,7 +69,7 @@
                 android:paddingStart="6dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/textColor"
+                android:textColor="@color/primaryDark"
                 android:textSize="18sp"/>
         </LinearLayout>
     </LinearLayout>
@@ -85,12 +82,12 @@
         android:layout_marginTop="6dp"
         android:layout_marginBottom="6dp"
         android:textSize="16sp"
-        android:textColor="@color/titleColor"/>
+        android:textColor="@color/text"/>
 
     <View
         android:id="@+id/tp_separator"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/separatorColor" />
+        android:background="@color/silverDark" />
 
 </LinearLayout>

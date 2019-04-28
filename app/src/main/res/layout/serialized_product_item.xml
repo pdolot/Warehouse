@@ -31,7 +31,7 @@
                         android:layout_height="wrap_content"
                         android:text="Data ważności:"
                         android:textSize="12sp"
-                        android:textColor="@color/titleColor"/>
+                        android:textColor="@color/text"/>
                     <TextView
                         android:id="@+id/s_product_expiryDate"
                         android:layout_width="match_parent"
@@ -39,7 +39,7 @@
                         android:text="10/04/2019"
                         android:paddingStart="4dp"
                         android:fontFamily="sans-serif-light"
-                        android:textColor="@color/textColor"/>
+                        android:textColor="@color/primaryDark"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -52,7 +52,7 @@
                         android:layout_height="wrap_content"
                         android:text="Ilość:"
                         android:textSize="12sp"
-                        android:textColor="@color/titleColor"/>
+                        android:textColor="@color/text"/>
                     <TextView
                         android:id="@+id/s_product_count"
                         android:paddingStart="4dp"
@@ -61,7 +61,7 @@
                         android:layout_height="wrap_content"
                         android:text="24 szt/ 6 zgrz"
                         android:fontFamily="sans-serif-light"
-                        android:textColor="@color/textColor"/>
+                        android:textColor="@color/primaryDark"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:text="Lokalizacje:"
                 android:textSize="12sp"
-                android:textColor="@color/titleColor"/>
+                android:textColor="@color/text"/>
 
             <TextView
                 android:id="@+id/s_product_locations"
@@ -81,7 +81,7 @@
                 android:text="328423"
                 android:paddingStart="4dp"
                 android:fontFamily="sans-serif-light"
-                android:textColor="@color/textColor"/>
+                android:textColor="@color/primaryDark"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -89,5 +89,5 @@
         android:id="@+id/separator"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/separatorColor" />
+        android:background="@color/silverDark" />
 </LinearLayout>

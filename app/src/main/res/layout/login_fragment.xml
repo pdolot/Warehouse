@@ -35,7 +35,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_width="100sp"
                     android:layout_height="60sp"
-                    android:tint="@color/viewPagerBackground"
+                    android:tint="@color/silverLight"
                     android:src="@drawable/ic_mps"
                     android:scaleType="fitCenter"/>
 
@@ -54,7 +54,7 @@
                     android:textAlignment="center"
                     android:textSize="20sp" />
 
-                <com.example.patryk.warehouse.FancyEditText
+                <com.example.patryk.warehouse.Components.FancyEditText
                     android:id="@+id/lf_userName"
                     android:layout_width="match_parent"
                     android:layout_height="46sp"
@@ -65,12 +65,12 @@
                     android:hint="ID pracownika"
                     android:inputType="text"
                     android:text=""
-                    app:backgroundColor="@color/editBackgroundColor"
-                    app:color="@color/editColor"
-                    app:iconColor="@color/editIconColor"
+                    app:backgroundColor="@color/silverMedium"
+                    app:color="@color/primary"
+                    app:iconColor="@color/silverLight"
                     app:iconLeft="@drawable/ic_login"
-                    app:outlineColor="@color/outlineColor" />
-                <com.example.patryk.warehouse.FancyEditText
+                    app:outlineColor="@color/silverMedium" />
+                <com.example.patryk.warehouse.Components.FancyEditText
                     android:id="@+id/lf_password"
                     android:layout_width="match_parent"
                     android:layout_height="46sp"
@@ -80,11 +80,11 @@
                     android:fontFamily="sans-serif-light"
                     android:hint="Hasło"
                     android:inputType="textPassword"
-                    app:backgroundColor="@color/editBackgroundColor"
-                    app:color="@color/editColor"
-                    app:iconColor="@color/editIconColor"
+                    app:backgroundColor="@color/silverMedium"
+                    app:color="@color/primary"
+                    app:iconColor="@color/silverLight"
                     app:iconLeft="@drawable/ic_password"
-                    app:outlineColor="@color/outlineColor" />
+                    app:outlineColor="@color/silverMedium" />
 
                 <RelativeLayout
                     android:id="@+id/lf_sign_in"
@@ -101,7 +101,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif"
                         android:text="Zaloguj"
-                        android:textColor="@color/editIconColor"
+                        android:textColor="@color/silverLight"
                         android:textSize="18sp" />
                 </RelativeLayout>
             </LinearLayout>

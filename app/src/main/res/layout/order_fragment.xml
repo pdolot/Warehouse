@@ -19,7 +19,7 @@
             app:ael_duration="500"
             app:ael_interpolator="decelerate"
             app:ael_orientation="vertical"
-            android:background="@color/editColor"
+            android:background="@color/primary"
             android:paddingTop="16dp"
             android:paddingLeft="16dp"
             android:paddingRight="16dp">
@@ -83,14 +83,14 @@
                             android:text="@string/recipient"
                             android:textSize="12sp"
                             android:fontFamily="sans-serif-light"
-                            android:textColor="@color/backgroundColor"/>
+                            android:textColor="@color/silverLight"/>
                         <TextView
                             android:paddingStart="8dp"
                             android:id="@+id/of_orderRecipient"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="16sp"
-                            android:textColor="@color/backgroundColor"/>
+                            android:textColor="@color/silverLight"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -103,14 +103,14 @@
                             android:text="@string/departure_date"
                             android:textSize="12sp"
                             android:fontFamily="sans-serif-light"
-                            android:textColor="@color/backgroundColor"/>
+                            android:textColor="@color/silverLight"/>
                         <TextView
                             android:paddingStart="8sp"
                             android:id="@+id/of_orderDepartureDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="16sp"
-                            android:textColor="@color/backgroundColor"/>
+                            android:textColor="@color/silverLight"/>
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -130,14 +130,14 @@
                             android:text="@string/target_location"
                             android:textSize="12sp"
                             android:fontFamily="sans-serif-light"
-                            android:textColor="@color/backgroundColor"/>
+                            android:textColor="@color/silverLight"/>
                         <TextView
                             android:paddingStart="8sp"
                             android:id="@+id/of_orderTargetLocation"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="16sp"
-                            android:textColor="@color/backgroundColor"/>
+                            android:textColor="@color/silverLight"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -150,14 +150,14 @@
                             android:text="@string/positions"
                             android:textSize="12sp"
                             android:fontFamily="sans-serif-light"
-                            android:textColor="@color/backgroundColor"/>
+                            android:textColor="@color/silverLight"/>
                         <TextView
                             android:paddingStart="8sp"
                             android:id="@+id/of_orderPositions"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="16sp"
-                            android:textColor="@color/backgroundColor"/>
+                            android:textColor="@color/silverLight"/>
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -177,14 +177,14 @@
                             android:text="@string/order_id"
                             android:textSize="12sp"
                             android:fontFamily="sans-serif-light"
-                            android:textColor="@color/backgroundColor"/>
+                            android:textColor="@color/silverLight"/>
                         <TextView
                             android:paddingStart="8sp"
                             android:id="@+id/of_orderId"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="16sp"
-                            android:textColor="@color/backgroundColor"/>
+                            android:textColor="@color/silverLight"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -197,14 +197,14 @@
                             android:text="@string/pallets"
                             android:textSize="12sp"
                             android:fontFamily="sans-serif-light"
-                            android:textColor="@color/backgroundColor"/>
+                            android:textColor="@color/silverLight"/>
                         <TextView
                             android:paddingStart="8sp"
                             android:id="@+id/of_orderPallets"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="16sp"
-                            android:textColor="@color/backgroundColor"/>
+                            android:textColor="@color/silverLight"/>
                     </LinearLayout>
                 </LinearLayout>
                 <View
@@ -233,7 +233,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Produkty"
-                android:textColor="@color/backgroundColor"
+                android:textColor="@color/silverLight"
                 android:textSize="18sp" />
             <TextView
                 android:id="@+id/of_took_product"
@@ -241,7 +241,7 @@
                 android:layout_weight="0.1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/backgroundColor"
+                android:textColor="@color/silverLight"
                 android:textSize="18sp"/>
 
         </LinearLayout>
@@ -286,7 +286,7 @@
             android:layout_width="250dp"
             android:layout_height="46dp"
             android:layout_marginLeft="-36dp"
-            android:background="@color/buttonBackground"
+            android:background="@color/silverDark"
             android:orientation="horizontal"
             android:gravity="center">
             <EditText
@@ -316,7 +316,7 @@
                 android:layout_width="42dp"
                 android:layout_height="46dp"
                 android:src="@drawable/ic_arrowright"
-                android:tint="@color/iconColor"/>
+                android:tint="@color/primary"/>
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

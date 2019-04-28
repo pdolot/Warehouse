@@ -4,9 +4,10 @@
         <shape android:shape="rectangle">
             <gradient
                 android:angle="315"
-                android:endColor="@color/buttonColor"
-                android:startColor="@color/editColor"
+                android:endColor="@color/primaryDark"
+                android:startColor="@color/primary"
                 android:type="linear" />
+            <corners android:topRightRadius="23sp"/>
         </shape>
     </item>
 

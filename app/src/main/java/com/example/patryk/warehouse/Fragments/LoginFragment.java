@@ -9,11 +9,11 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.patryk.warehouse.BaseFragment.BaseFragment;
-import com.example.patryk.warehouse.FancyEditText;
+import com.example.patryk.warehouse.Components.FancyEditText;
+import com.example.patryk.warehouse.Models.SignIn;
 import com.example.patryk.warehouse.Models.User;
 import com.example.patryk.warehouse.R;
 import com.example.patryk.warehouse.REST.Rest;
-import com.google.gson.GsonBuilder;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -66,20 +66,20 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
     }
 
     private void signIn(String username, String password){
-        User user = new User(username,password);
-        Rest.getRest().login(user).enqueue(new Callback<User>() {
+        SignIn user = new SignIn(username,password);
+        Rest.getRest().login(user).enqueue(new Callback<SignIn>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(Call<SignIn> call, Response<SignIn> response) {
                 if(response.isSuccessful() && response.body() != null) {
                     Rest.token = "Bearer " +  response.body().getToken();
-                    getNavigationsInteractions().changeFragment(MainFragment.newInstance(), false);
+                    getNavigationsInteractions().changeFragment(MainFragment.newInstance(response.body().getUser()), false);
                 }else{
                     Toast.makeText(getContext(), "Nie istnieje taki użytkownik", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<SignIn> call, Throwable t) {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

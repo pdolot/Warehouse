@@ -13,7 +13,9 @@ import android.widget.TextView;
 
 import com.example.patryk.warehouse.Models.ProductToTake;
 import com.example.patryk.warehouse.R;
+import com.google.gson.GsonBuilder;
 
+import java.io.IOException;
 import java.util.List;
 
 public class TakeProductRecyclerViewAdapter extends RecyclerView.Adapter<TakeProductRecyclerViewAdapter.ViewHolder> {
@@ -57,7 +59,10 @@ public class TakeProductRecyclerViewAdapter extends RecyclerView.Adapter<TakePro
             viewHolder.separator.setVisibility(View.GONE);
         }
 
-        viewHolder.expiry_date.setText(product.getProduct().getExpiryDate().substring(0,10));
+
+        if(product.getProduct().getExpiryDate() != null){
+            viewHolder.expiry_date.setText(product.getProduct().getExpiryDate().substring(0,10));
+        }
 
         viewHolder.edit_productCount.setText(String.valueOf(product.getTookCount()));
         viewHolder.edit_productCount.setSelection(viewHolder.edit_productCount.getText().length());

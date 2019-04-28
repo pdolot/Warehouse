@@ -1,4 +1,4 @@
-package com.example.patryk.warehouse;
+package com.example.patryk.warehouse.Dialogs;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -10,11 +10,13 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.patryk.warehouse.Adapters.TakeProductRecyclerViewAdapter;
 import com.example.patryk.warehouse.Models.ProductToTake;
+import com.example.patryk.warehouse.R;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -31,7 +33,8 @@ public class TakeProductDialog extends Dialog {
     private static String LOC = "LOK: ";
     private String location;
 
-    private LinearLayout accept, cancel;
+    private LinearLayout accept;
+    private ImageView cancel;
     private TextView locationLabel;
     private RecyclerView recyclerView;
     private List<ProductToTake> productToTakes = new ArrayList<>();
@@ -58,7 +61,7 @@ public class TakeProductDialog extends Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.take_product_dialog);
+        setContentView(R.layout.take_product_dialog2);
 
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         lp.copyFrom(getWindow().getAttributes());

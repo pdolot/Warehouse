@@ -1,5 +1,7 @@
 package com.example.patryk.warehouse;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -34,7 +36,28 @@ public class StartActivity extends AppCompatActivity implements FragmentNavigati
             fragmentTransaction.addToBackStack(fragment.toString());
         }
         fragmentTransaction.commit();
+    }
 
+    @Override
+    public void onBackPressed() {
 
+        if(getSupportFragmentManager().getBackStackEntryCount() == 0){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Zamknij aplikację");
+            builder.setMessage("Czy na pewno chcesz zamknąć aplikację?");
+            builder.setPositiveButton("Tak", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    StartActivity.super.onBackPressed();
+                }
+            });
+            builder.setNegativeButton("Nie", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.dismiss();
+                }
+            });
+            builder.show();
+        }else{
+            StartActivity.super.onBackPressed();
+        }
     }
 }

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.patryk.warehouse.Adapters.OrdersRecyclerViewAdapter;
+import com.example.patryk.warehouse.Models.Id;
 import com.example.patryk.warehouse.Models.Order;
 import com.example.patryk.warehouse.Models.Principal;
 import com.example.patryk.warehouse.R;
@@ -53,12 +54,14 @@ public class OrdersFragment extends OrderBaseFragment{
         return view;
     }
 
+
     private void setOnClickListeners() {
         ordersAdapter.setOnClickListener(new OrdersRecyclerViewAdapter.ClickListener() {
             @Override
             public void onItemClick(int position, View v) {
                 Long id = ordersList.get(position).getId();
-                changeFragment(OrderFragment.newInstance(id),false);
+                fetch_order(id);
+                //changeFragment(OrderFragment.newInstance(id),false);
             }
         });
 
@@ -96,19 +99,46 @@ public class OrdersFragment extends OrderBaseFragment{
                     }else {
                         ordersExist.setVisibility(View.VISIBLE);
                     }
+                }else{
+                    ordersExist.setVisibility(View.VISIBLE);
+                }
+
+                if(isRefreshing){
+                    if(refreshLayout.isRefreshing()){
+                        refreshLayout.setRefreshing(false);
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<List<Order>> call, Throwable t) {
+                if(isRefreshing){
+                    if(refreshLayout.isRefreshing()){
+                        ordersExist.setVisibility(View.VISIBLE);
+                        refreshLayout.setRefreshing(false);
+                    }
+                }
             }
         });
 
-        if(isRefreshing){
-            if(refreshLayout.isRefreshing()){
-                refreshLayout.setRefreshing(false);
-            }
-        }
+    }
 
+    private void fetch_order(final Long order_id) {
+        Id id = new Id();
+        id.setId(order_id);
+        Rest.getRest().getOrder(Rest.token, id).enqueue(new Callback<Order>() {
+            @Override
+            public void onResponse(Call<Order> call, Response<Order> response) {
+                if (response.isSuccessful() && response != null) {
+                    Order order = response.body();
+                    changeFragment(OrderFragment.newInstance(order),false);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Order> call, Throwable t) {
+
+            }
+        });
     }
 }
