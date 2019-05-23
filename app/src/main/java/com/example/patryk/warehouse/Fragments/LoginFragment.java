@@ -58,6 +58,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
         switch (v.getId()) {
             case R.id.lf_sign_in:
                 signIn(userName.getText().toString(), userPassword.getText().toString());
+                signIn.setEnabled(false);
                 break;
         }
     }
@@ -73,11 +74,14 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
                 }else{
                     Toast.makeText(getContext(), "Nie istnieje taki użytkownik", Toast.LENGTH_SHORT).show();
                 }
+
+                signIn.setEnabled(true);
             }
 
             @Override
             public void onFailure(Call<SignIn> call, Throwable t) {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                signIn.setEnabled(true);
             }
         });
     }
