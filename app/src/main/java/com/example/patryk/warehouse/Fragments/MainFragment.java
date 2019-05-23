@@ -85,14 +85,17 @@ public class MainFragment extends BaseFragment implements ViewPager.OnPageChange
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        getOrdersCount();
-                    }
-                });
+                if(getActivity() != null){
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            getOrdersCount();
+                        }
+                    });
+                }
+
             }
-        }, 0, 120000);
+        }, 0, 30000);
         return view;
     }
 

@@ -129,9 +129,9 @@ public class ChangeLocationFragment extends ChangeLocationBaseFragment implement
                     } else if (!CHANGE_LOCATION_RESULT_CODE.equals("")
                             && CHANGE_LOCATION_RESULT_CODE2.equals("")) {
                         CHANGE_LOCATION_RESULT_CODE2 = inputCode.getText().toString();
-                        if(!CHANGE_LOCATION_RESULT_CODE2.equals(CHANGE_LOCATION_RESULT_CODE)){
-                            setSecond_location();
-                        }else {
+                        if (!CHANGE_LOCATION_RESULT_CODE2.equals(CHANGE_LOCATION_RESULT_CODE)) {
+                            checkIfLocationExist();
+                        } else {
                             CHANGE_LOCATION_RESULT_CODE2 = "";
                             Toast.makeText(getContext(), "Nie możesz odłożyć w to samo miejsce", Toast.LENGTH_SHORT).show();
                         }
@@ -271,12 +271,12 @@ public class ChangeLocationFragment extends ChangeLocationBaseFragment implement
 //        if (!CHANGE_LOCATION_RESULT_CODE2.equals("")) setSecond_location();
         if (!CHANGE_LOCATION_RESULT_CODE.equals("")
                 && CHANGE_LOCATION_RESULT_CODE2.equals("")) {
-            getInfoAboutLocation();
+            if(tookProducts.size() == 0) getInfoAboutLocation();
         }
         if (!CHANGE_LOCATION_RESULT_CODE2.equals("")) {
-            if(!CHANGE_LOCATION_RESULT_CODE2.equals(CHANGE_LOCATION_RESULT_CODE)){
-                setSecond_location();
-            }else {
+            if (!CHANGE_LOCATION_RESULT_CODE2.equals(CHANGE_LOCATION_RESULT_CODE)) {
+                checkIfLocationExist();
+            } else {
                 CHANGE_LOCATION_RESULT_CODE2 = "";
                 isReturned = true;
                 setFirst_location();
@@ -402,7 +402,29 @@ public class ChangeLocationFragment extends ChangeLocationBaseFragment implement
 
             }
         });
-
     }
 
+    private void checkIfLocationExist(){
+        Location newLocation = new Location();
+        newLocation.setBarCodeLocation(CHANGE_LOCATION_RESULT_CODE2);
+        Rest.getRest().checkIfLocationExist(Rest.token,newLocation).enqueue(new Callback<Status>() {
+            @Override
+            public void onResponse(Call<Status> call, Response<Status> response) {
+                if(response.isSuccessful() && response.body() != null){
+                    if(response.body().getStatus().equals("Exist")){
+                        setSecond_location();
+                    }else{
+                        Toast.makeText(getContext(), "Nie istnieje taka lokalizacja", Toast.LENGTH_SHORT).show();
+                        CHANGE_LOCATION_RESULT_CODE2 = "";
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Status> call, Throwable t) {
+
+            }
+        });
+    }
 }

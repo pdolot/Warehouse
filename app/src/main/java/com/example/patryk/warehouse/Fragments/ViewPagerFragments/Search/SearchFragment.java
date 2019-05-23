@@ -116,9 +116,9 @@ public class SearchFragment extends SearchBaseFragment implements View.OnClickLi
             @Override
             public void onChanged() {
                 if(autoCompleteArrayAdapter.getCount() > 0 && search.getText().length() > 0){
-                    search.setBackground(getResources().getDrawable(R.drawable.search_drop));
+                    search.setBackground(getResources().getDrawable(R.drawable.search_drop,null));
                 }else{
-                    search.setBackground(getResources().getDrawable(R.drawable.search));
+                    search.setBackground(getResources().getDrawable(R.drawable.search,null));
                 }
             }
         });

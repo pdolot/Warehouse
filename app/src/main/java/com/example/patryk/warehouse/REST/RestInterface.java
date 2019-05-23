@@ -91,4 +91,7 @@ public interface RestInterface {
 
     @POST("/Product/changeLocationOfTheProduct")
     Call<Status> changeLocation(@Header("Authorization") String authToken, @Body LocationsToChange locations);
+
+    @POST("/Location/locationCheck")
+    Call<Status> checkIfLocationExist(@Header("Authorization") String authToken, @Body Location location);
 }

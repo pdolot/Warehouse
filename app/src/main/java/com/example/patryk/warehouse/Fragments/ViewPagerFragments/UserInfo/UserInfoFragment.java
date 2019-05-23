@@ -163,8 +163,7 @@ public class UserInfoFragment extends Fragment implements View.OnTouchListener, 
                     ordersCountList.clear();
                     dates.clear();
                     for (UserWorkDay workDay : workDays) {
-                        Random random = new Random();
-                        ordersCountList.add(workDay.getDay().getAmountOfOrders() + random.nextInt(30));
+                        ordersCountList.add(workDay.getDay().getAmountOfOrders());
                         dates.add(workDay.getDay().getDate());
                     }
                     chart.setDates(dates);

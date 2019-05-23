@@ -347,6 +347,7 @@ public class OrderFragment extends OrderBaseFragment implements
             // cancel order
             case R.id.of_cancelOrder:
                 mergeTookProducts();
+                setTookProductCount();
                 if (tookProduct_count > 0 && tookProduct_count < productList.size()) {
                     Toast.makeText(getContext(), "Musisz odłożyć wszystkie wzięte produkty", Toast.LENGTH_SHORT).show();
                 } else if (tookProduct_count == productList.size()) {
